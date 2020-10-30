@@ -34,8 +34,4 @@ public class ServicioCrearUsuarioTest {
         BasePrueba.assertThrows(() -> servicioCrearUsuario.ejecutar(usuario), ExcepcionDuplicidad.class,"El usuario ya existe en el sistema");
     }
     
-    @Test
-    public void validarError() {
-       assertTrue(false);
-    }
 }
