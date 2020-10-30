@@ -40,8 +40,8 @@ pipeline {
     stage('Compile & Unit Tests') {
       steps{
         echo "------------>Unit Tests<------------"
-		sh 'gradle --b ./alquiler/build.gradle clean compileJava'
-		sh 'gradle --b ./build.gradle test'
+		sh 'gradle --b ./backend/alquiler/build.gradle clean compileJava'
+		sh 'gradle --b ./backend/alquiler/build.gradle test'
       }
     }
 
@@ -57,7 +57,7 @@ pipeline {
     stage('Build') {
       steps {
         echo "------------>Build<------------"
-		sh 'gradle --b ./build.gradle build -x test'
+		sh 'gradle --b ./backend/alquiler/build.gradle build -x test'
       }
     }  
   }
@@ -68,7 +68,8 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
-	  junit 'build/test-results/test/*.xml'
+	  junit 'backend/alquiler/infraestructura/build/test-results/test/*.xml'
+	  junit 'backend/alquiler/dominio/build/test-results/test/*.xml'
     }
     failure {
       echo 'This will run only if failed'
