@@ -17,6 +17,13 @@ public interface RepositorioVideoJuego {
      * @return true si existe, false si no.
      */
     boolean existe(String codigo);
+    
+    /**
+     * Permite obtener el stock de un videojuego
+     * @param codigo
+     * @return true si existe, false si no.
+     */
+    int obtenerStock(String codigo);
 
     /**
      * Permite actualizar un videojuego

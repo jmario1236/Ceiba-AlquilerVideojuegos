@@ -1,4 +1,4 @@
-package com.ceiba.alquiler.servicio;
+package com.ceiba.alquiler.servicio.cliente;
 
 import org.junit.Test;
 import org.mockito.Mockito;

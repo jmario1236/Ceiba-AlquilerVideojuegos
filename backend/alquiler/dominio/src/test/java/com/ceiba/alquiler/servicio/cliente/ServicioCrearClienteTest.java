@@ -1,4 +1,4 @@
-package com.ceiba.alquiler.servicio;
+package com.ceiba.alquiler.servicio.cliente;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

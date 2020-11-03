@@ -26,7 +26,7 @@ public class VideoJuego {
 	public VideoJuego(Long id, String codigo, String nombre, String genero, Double precio, int stock) {
 		validarObligatorio(codigo, SE_DEBE_INGRESAR_CODIGO);
 		validarObligatorio(nombre, SE_DEBE_INGRESAR_NOMBRE);
-		validarObligatorio(precio, SE_DEBE_INGRESAR_PRECIO);
+		validarObligatorio(precio, SE_DEBE_INGRESAR_PRECIO);		
 		validarPositivo(precio, PRECIO_CON_VALOR_INCORRECTO);
 		this.id = id;
 		this.codigo = codigo;
@@ -36,15 +36,17 @@ public class VideoJuego {
 		this.stock = stock;
 	}
 	
-	public void quitarStock() {
-		if(stock  == 0) {
+	public void quitarDelStock(int cantidad) {
+		if(stock  == 0 || stock < cantidad) {
 			throw new ExcepcionValorInvalido(SIN_STOCK_PARA_ALQUILER);
 		}
-		stock --;
+		stock -= cantidad;
 	}
 	
-	public void agregarStock() {
-		stock ++;
+	public void agregarAlStock(int cantidad) {
+		if(cantidad > 0) {
+			stock += cantidad;
+		}		
 	}
 
 	

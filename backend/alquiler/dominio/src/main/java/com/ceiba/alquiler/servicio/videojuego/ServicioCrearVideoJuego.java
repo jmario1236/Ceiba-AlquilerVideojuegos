@@ -1,4 +1,4 @@
-package com.ceiba.alquiler.servicio;
+package com.ceiba.alquiler.servicio.videojuego;
 
 import com.ceiba.alquiler.modelo.entidad.VideoJuego;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioVideoJuego;

@@ -1,4 +1,4 @@
-package com.ceiba.alquiler.servicio;
+package com.ceiba.alquiler.servicio.cliente;
 
 import com.ceiba.alquiler.modelo.entidad.Cliente;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioCliente;

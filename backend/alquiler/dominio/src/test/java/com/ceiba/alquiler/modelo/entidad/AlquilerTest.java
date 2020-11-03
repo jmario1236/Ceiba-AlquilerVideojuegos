@@ -114,5 +114,24 @@ public class AlquilerTest {
 		assertEquals(videoJuego.getPrecio(), alquiler.getSubtotal());
 	}
 	
+	@Test
+	public void validarEstadoFinalizado() {
+		//arrange	
+		String finalizado = "FINALIZADO";
+		LocalDate fechaInicial = LocalDate.parse("2020-11-03");		
+		LocalDate fechaFinal = LocalDate.parse("2020-11-08");		
+		Alquiler alquiler = new AlquilerTestDataBuilder()
+				.conFechaMaximaEntrega(fechaFinal)
+				.conFechaAlquiler(fechaInicial)
+				.build();
+		//act
+		alquiler.cambiarEstadoVigente();
+		alquiler.finalizarAlquiler();
+		
+		//assert
+		assertEquals(
+				finalizado, 
+				alquiler.getEstado().getValue());		
+	}
 	
 }

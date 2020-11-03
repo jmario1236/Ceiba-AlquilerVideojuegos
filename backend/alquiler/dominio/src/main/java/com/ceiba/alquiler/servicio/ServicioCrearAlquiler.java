@@ -5,6 +5,7 @@ import java.util.List;
 import com.ceiba.alquiler.modelo.entidad.Alquiler;
 import com.ceiba.alquiler.modelo.entidad.AlquilerItem;
 import com.ceiba.alquiler.modelo.entidad.Cliente;
+import com.ceiba.alquiler.modelo.entidad.VideoJuego;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioAlquiler;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioCliente;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioVideoJuego;
@@ -32,18 +33,27 @@ public class ServicioCrearAlquiler {
 		validarSiClienteTieneAlquilerVigente(alquiler.getCliente());
 		validarVideoJuegosExisten(alquiler.getItems());
 		validarClienteExiste(alquiler.getCliente());
-		alquiler.cambiarEstadoVigente();		
-		return repositorioAlquiler.crear(alquiler);
+		alquiler.cambiarEstadoVigente();
+		actualizarStockVideoJuegos(alquiler.getItems());
+		return repositorioAlquiler.crear(alquiler);		
 	}
 	
-	public void validarClienteExiste(Cliente cliente) {
+	private void actualizarStockVideoJuegos(List<AlquilerItem> items) {
+		for(AlquilerItem item : items) {
+			VideoJuego videoJuego = item.getVideoJuego();				
+			videoJuego.quitarDelStock(item.getCantidad());
+			repositorioVideoJuego.actualizar(videoJuego);
+		}
+	}
+	
+	private void validarClienteExiste(Cliente cliente) {
 		boolean existe = repositorioCliente.existe(cliente.getIdentificacion());
 		if(!existe) {
 			throw new ExcepcionSinDatos(EL_CLIENTE_NO_EXISTE);
 		}
 	}
 	
-	public void validarVideoJuegosExisten(List<AlquilerItem> items) {
+	private void validarVideoJuegosExisten(List<AlquilerItem> items) {
 		for(AlquilerItem item : items) {
 			boolean existe = repositorioVideoJuego.existe(item.getVideoJuego().getCodigo());
 			if(!existe) {
