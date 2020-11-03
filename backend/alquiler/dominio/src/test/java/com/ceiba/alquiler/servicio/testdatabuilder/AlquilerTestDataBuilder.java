@@ -1,6 +1,7 @@
 package com.ceiba.alquiler.servicio.testdatabuilder;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ceiba.alquiler.modelo.entidad.Alquiler;
@@ -26,6 +27,11 @@ public class AlquilerTestDataBuilder {
 		return this;
 	}
 	
+	public AlquilerTestDataBuilder conItems(List<AlquilerItem> items) {
+		this.items = items != null ? new ArrayList<>(items): null;
+		return this;
+	}
+	
 	public AlquilerTestDataBuilder conId(Long id) {
 		this.id = id;
 		return this;
@@ -37,6 +43,7 @@ public class AlquilerTestDataBuilder {
 	}
 	
 	public AlquilerTestDataBuilder conFechaMaximaEntrega(LocalDate fechaMaximaEntrega) {
+		this.fechaMaximaEntrega = fechaMaximaEntrega;
 		return this;
 	}
 	

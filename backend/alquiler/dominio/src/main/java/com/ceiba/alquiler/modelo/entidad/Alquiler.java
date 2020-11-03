@@ -52,7 +52,7 @@ public class Alquiler {
 		this.cliente = cliente;
 		this.fechaAlquiler = fechaAlquiler;
 		this.fechaMaximaEntrega = fechaMaximaEntrega;
-		this.items = items;
+		this.items = items != null ? new ArrayList<>(items): null;
 		subtotal = Double.valueOf(0);
 		total = Double.valueOf(0);
 		totalMulta = Double.valueOf(0);
@@ -96,18 +96,16 @@ public class Alquiler {
 	private void generarMultas() {
 		LocalDate hoy = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		if (fechaMaximaEntrega.isBefore(hoy)) {
-			long dias = ChronoUnit.DAYS.between(fechaMaximaEntrega, fechaEntrega);
+			long dias = ChronoUnit.DAYS.between(fechaMaximaEntrega, hoy);
 			totalMulta = (subtotal * PORCENTAJE_MULTA) * dias;
 		}
 	}
 
 	private void generarTotalDiasAdicionales() {
-		long dias = ChronoUnit.DAYS.between(fechaAlquiler, fechaMaximaEntrega) - NUMERO_DIAS_ALQUILER;
-		double porcentajeTotalAdicional = 0;
+		long dias = ChronoUnit.DAYS.between(fechaAlquiler, fechaMaximaEntrega) - NUMERO_DIAS_ALQUILER;		
 		if (dias > 0) {
-			porcentajeTotalAdicional = (subtotal * PORCENTAJE_ADICIONAL) * dias;
-		}
-		totalAdiccional = porcentajeTotalAdicional;
+			totalAdiccional = (subtotal * PORCENTAJE_ADICIONAL) * dias;
+		}		
 	}
 
 }

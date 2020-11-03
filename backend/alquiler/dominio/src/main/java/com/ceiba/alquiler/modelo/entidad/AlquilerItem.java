@@ -29,5 +29,6 @@ public class AlquilerItem {
 	
 	public Double generarImporte() {
 		return videoJuego.getPrecio() * cantidad.doubleValue();
-	}
+	}	
+	
 }

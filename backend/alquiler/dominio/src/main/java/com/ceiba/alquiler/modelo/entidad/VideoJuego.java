@@ -46,5 +46,9 @@ public class VideoJuego {
 	public void agregarStock() {
 		stock ++;
 	}
+
+	
+	
+	
 	
 }

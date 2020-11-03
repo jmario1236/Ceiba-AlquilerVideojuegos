@@ -57,6 +57,6 @@ public class ServicioCrearAlquiler {
 		if(tieneVigente) {
 			throw new ExcepcionValorInvalido(CLIENTE_TIENE_UN_ALQUILER_VIGENTE);
 		}
-	}
-
+	}	
+	
 }

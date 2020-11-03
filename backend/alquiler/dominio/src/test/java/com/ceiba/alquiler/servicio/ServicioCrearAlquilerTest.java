@@ -2,7 +2,9 @@ package com.ceiba.alquiler.servicio;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 
 import com.ceiba.BasePrueba;
@@ -18,16 +20,25 @@ public class ServicioCrearAlquilerTest {
 	
 	private static final String CLIENTE_TIENE_UN_ALQUILER_VIGENTE = "El cliente tiene un alquiler vigente en el sistema";
 	
+	private RepositorioAlquiler repositorioAlquiler;
+	private RepositorioCliente repositorioCliente;
+	private RepositorioVideoJuego repositorioVideoJuego;
+	
+	@BeforeEach
+	public void init() {
+		repositorioAlquiler = Mockito.mock(RepositorioAlquiler.class);
+		repositorioCliente = Mockito.mock(RepositorioCliente.class);
+		repositorioVideoJuego = Mockito.mock(RepositorioVideoJuego.class);
+	}
+	
 	@Test
 	public void crearAlquilerTest() {
 		//arrange
-		Alquiler alquiler = new AlquilerTestDataBuilder().build();
-		RepositorioAlquiler repositorioAlquiler = Mockito.mock(RepositorioAlquiler.class);
-		RepositorioCliente repositorioCliente = Mockito.mock(RepositorioCliente.class);
-		RepositorioVideoJuego repositorioVideoJuego = Mockito.mock(RepositorioVideoJuego.class);
+		Alquiler alquiler = new AlquilerTestDataBuilder().build();		
 		Mockito.when(repositorioAlquiler.crear(alquiler)).thenReturn(1L);
 		Mockito.when(repositorioCliente.existe(Mockito.anyString())).thenReturn(true);
 		Mockito.when(repositorioVideoJuego.existe(Mockito.anyString())).thenReturn(true);
+		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente().getIdentificacion())).thenReturn(false);
 		ServicioCrearAlquiler servicio = new ServicioCrearAlquiler(repositorioAlquiler, repositorioCliente, repositorioVideoJuego);
 		
 		//act
@@ -40,10 +51,7 @@ public class ServicioCrearAlquilerTest {
 	@Test
 	public void validarAlquilerVigenteTest() {
 		//arrange
-		Alquiler alquiler = new AlquilerTestDataBuilder().build();
-		RepositorioAlquiler repositorioAlquiler = Mockito.mock(RepositorioAlquiler.class);
-		RepositorioCliente repositorioCliente = Mockito.mock(RepositorioCliente.class);
-		RepositorioVideoJuego repositorioVideoJuego = Mockito.mock(RepositorioVideoJuego.class);
+		Alquiler alquiler = new AlquilerTestDataBuilder().build();		
 		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente().getIdentificacion())).thenReturn(true);
 		Mockito.when(repositorioAlquiler.crear(alquiler)).thenReturn(1L);
 		Mockito.when(repositorioCliente.existe(Mockito.anyString())).thenReturn(true);
@@ -58,10 +66,7 @@ public class ServicioCrearAlquilerTest {
 	@Test
 	public void validarClienteTest() {
 		//arrange
-		Alquiler alquiler = new AlquilerTestDataBuilder().build();
-		RepositorioAlquiler repositorioAlquiler = Mockito.mock(RepositorioAlquiler.class);
-		RepositorioCliente repositorioCliente = Mockito.mock(RepositorioCliente.class);
-		RepositorioVideoJuego repositorioVideoJuego = Mockito.mock(RepositorioVideoJuego.class);
+		Alquiler alquiler = new AlquilerTestDataBuilder().build();		
 		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente().getIdentificacion())).thenReturn(false);
 		Mockito.when(repositorioAlquiler.crear(alquiler)).thenReturn(1L);
 		Mockito.when(repositorioCliente.existe(Mockito.anyString())).thenReturn(false);
@@ -77,9 +82,6 @@ public class ServicioCrearAlquilerTest {
 	public void validarVideoJuegosAlquilerTest() {
 		//arrange
 		Alquiler alquiler = new AlquilerTestDataBuilder().build();
-		RepositorioAlquiler repositorioAlquiler = Mockito.mock(RepositorioAlquiler.class);
-		RepositorioCliente repositorioCliente = Mockito.mock(RepositorioCliente.class);
-		RepositorioVideoJuego repositorioVideoJuego = Mockito.mock(RepositorioVideoJuego.class);
 		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente().getIdentificacion())).thenReturn(false);
 		Mockito.when(repositorioAlquiler.crear(alquiler)).thenReturn(1L);
 		Mockito.when(repositorioCliente.existe(Mockito.anyString())).thenReturn(true);
@@ -90,4 +92,7 @@ public class ServicioCrearAlquilerTest {
 		BasePrueba.assertThrows(() -> servicio.ejecutar(alquiler), ExcepcionSinDatos.class, "VideoJuego no existe");
 		
 	}
+	
+	
+
 }

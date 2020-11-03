@@ -1,10 +1,11 @@
 package com.ceiba.alquiler.modelo.entidad;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 
-public class Validador {
+public final class Validador {
 	
 	private Validador() {}
 	
@@ -15,9 +16,9 @@ public class Validador {
 		}
 	}
 	
-	public static void validarFechasNumeroDias(LocalDate fechaInicial, LocalDate fechaEstimada,int dias ,String mensaje) {
-		LocalDate temp = fechaInicial.plusDays(dias);
-		if(!temp.isEqual(fechaEstimada)) {
+	public static void validarFechasNumeroDias(LocalDate fechaInicial, LocalDate fechaEstimada,int dias ,String mensaje) {		
+		long diasDiff = ChronoUnit.DAYS.between(fechaInicial, fechaEstimada) - dias;
+		if( diasDiff < 0) {
 			throw new ExcepcionValorInvalido(mensaje);
 		}
 	}
