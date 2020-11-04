@@ -1,6 +1,5 @@
 package com.ceiba.alquiler.servicio.cliente;
 
-import com.ceiba.alquiler.modelo.entidad.Cliente;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioCliente;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 
@@ -12,13 +11,13 @@ public class ServicioEliminarCliente {
 		this.repositorioCliente = repositorioCliente;
 	}
 	
-	public void ejecutar(Cliente cliente) {
-		validarExisteCliente(cliente.getIdentificacion());
-		repositorioCliente.eliminar(cliente.getId());
+	public void ejecutar(Long id) {
+		validarExisteCliente(id);
+		repositorioCliente.eliminar(id);
 	}
 	
-	private void validarExisteCliente(String identificacion) {
-		boolean existe = repositorioCliente.existe(identificacion);
+	private void validarExisteCliente(Long id) {
+		boolean existe = repositorioCliente.existeId(id);
 		if(!existe) {
 			throw new ExcepcionSinDatos(EL_CLIENTE_NO_EXISTE);
 		}

@@ -28,4 +28,11 @@ public interface RepositorioCliente {
      * @param id
      */
     void eliminar(Long id);
+
+    /**
+     * Permite saber si un cliente existe mediante su id
+     * @param id
+     * @return true si existe, false si no.
+     */
+	boolean existeId(Long id);
 }

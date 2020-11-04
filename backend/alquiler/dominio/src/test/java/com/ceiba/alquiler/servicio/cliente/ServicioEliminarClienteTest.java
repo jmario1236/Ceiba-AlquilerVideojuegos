@@ -17,11 +17,11 @@ public class ServicioEliminarClienteTest {
 		// arrange
 		Cliente cliente = new ClienteTestDataBuilder().build();
 		RepositorioCliente repositorio = Mockito.mock(RepositorioCliente.class);
-		Mockito.when(repositorio.existe(cliente.getIdentificacion())).thenReturn(false);
+		Mockito.when(repositorio.existeId(cliente.getId())).thenReturn(false);
 		ServicioEliminarCliente servicio = new ServicioEliminarCliente(repositorio);
 		
 		// act-assert
-		BasePrueba.assertThrows(() -> servicio.ejecutar(cliente), ExcepcionSinDatos.class, "El cliente no existe");
+		BasePrueba.assertThrows(() -> servicio.ejecutar(cliente.getId()), ExcepcionSinDatos.class, "El cliente no existe");
 		
 	}
 }

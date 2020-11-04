@@ -1,4 +1,4 @@
-package com.ceiba.alquiler.videojuego.controlador.testdatabuilder;
+package com.ceiba.alquiler.controlador.testdatabuilder;
 
 import com.ceiba.alquiler.comando.ComandoVideoJuego;
 

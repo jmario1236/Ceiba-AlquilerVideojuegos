@@ -1,0 +1,1 @@
+insert into cliente (identificacion, nombre,apellido,telefono,direccion) values (:identificacion, :nombre,:apellido,:telefono,:direccion)

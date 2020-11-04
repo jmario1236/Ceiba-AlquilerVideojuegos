@@ -1,4 +1,4 @@
-package com.ceiba.alquiler.controlador.videojuego;
+package com.ceiba.alquiler.controlador.cliente;
 
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -18,9 +18,8 @@ import com.ceiba.ApplicationMock;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = ApplicationMock.class)
-@WebMvcTest(ConsultaControladorVideoJuego.class)
-public class ConsultarControladorVideoJuegoTest {
-
+@WebMvcTest(ConsultaControladorCliente.class)
+public class ConsultaControladorClienteTest {
 	@Autowired
 	private MockMvc mocMvc;
 
@@ -29,9 +28,9 @@ public class ConsultarControladorVideoJuegoTest {
 		// arrange
 
 		// act - assert
-		mocMvc.perform(get("/videojuegos")
+		mocMvc.perform(get("/clientes")
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())				
-				.andExpect(jsonPath("$[0].genero", is("Plataforma")));
+				.andExpect(jsonPath("$[0].direccion", is("Centro")));
 	}
 }

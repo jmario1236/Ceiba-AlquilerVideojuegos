@@ -11,7 +11,7 @@ import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 
 @Component
 public class DaoVideoJuegoH2 implements DaoVideoJuego{
-	 private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
+	private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
 	    @SqlStatement(namespace="videojuego", value="listar")
 	    private static String sqlListar;

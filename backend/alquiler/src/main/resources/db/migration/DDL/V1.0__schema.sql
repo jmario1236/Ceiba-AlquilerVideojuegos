@@ -8,6 +8,16 @@ create table videojuego (
  primary key (id)
 );
 
+create table cliente (
+ id int(11) not null auto_increment,
+ identificacion varchar(50) not null,
+ nombre varchar(100) not null,
+ apellido varchar(100) null,
+ telefono varchar(50) not null,
+ direccion varchar(100) null, 
+ primary key (id)
+);
+
 
 /*create table usuario (
  id int(11) not null auto_increment,

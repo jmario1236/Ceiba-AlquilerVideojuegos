@@ -9,26 +9,35 @@ import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 
 @Repository
-public class RepositorioVideoJuegoH2 implements RepositorioVideoJuego{
-	
-	private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
+public class RepositorioVideoJuegoH2 implements RepositorioVideoJuego {
 
-    @SqlStatement(namespace="videojuego", value="crear")
-    private static String sqlCrear;
-    
-    @SqlStatement(namespace="videojuego", value="existe")
-    private static String sqlExiste;
-    
-    @SqlStatement(namespace="videojuego", value="existeId")
-    private static String sqlExisteId;
-    
-    @SqlStatement(namespace="videojuego", value="actualizar")
-    private static String sqlActualizar;
-    
-    
-    public RepositorioVideoJuegoH2(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
-        this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
-    }
+	private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
+	private static final String CODIGO = "codigo";
+
+	@SqlStatement(namespace = "videojuego", value = "crear")
+	private static String sqlCrear;
+
+	@SqlStatement(namespace = "videojuego", value = "existe")
+	private static String sqlExiste;
+
+	@SqlStatement(namespace = "videojuego", value = "existeId")
+	private static String sqlExisteId;
+
+	@SqlStatement(namespace = "videojuego", value = "actualizar")
+	private static String sqlActualizar;
+
+	@SqlStatement(namespace = "videojuego", value = "consultar")
+	private static String sqlConsultar;
+	
+	@SqlStatement(namespace = "videojuego", value = "eliminar")
+	private static String sqlEliminar;
+	
+	@SqlStatement(namespace = "videojuego", value = "obtenerStock")
+	private static String sqlObtenerStock;
+
+	public RepositorioVideoJuegoH2(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
+		this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
+	}
 
 	@Override
 	public Long crear(VideoJuego videoJuego) {
@@ -38,38 +47,51 @@ public class RepositorioVideoJuegoH2 implements RepositorioVideoJuego{
 	@Override
 	public boolean existe(String codigo) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("codigo", codigo);
-		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
+		paramSource.addValue(CODIGO, codigo);
+		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,
+				paramSource, Boolean.class);
 	}
 
 	@Override
 	public VideoJuego consultar(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("id", id);
+		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlConsultar,
+				paramSource, (rs, rowNum) -> new VideoJuego(rs.getLong("id"), 
+															rs.getString(CODIGO),
+															rs.getString("nombre"), 
+															rs.getString("genero"), 
+															rs.getDouble("precio"), 
+															rs.getInt("stock")));
+
 	}
 
 	@Override
 	public int obtenerStock(String codigo) {
-		// TODO Auto-generated method stub
-		return 0;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue(CODIGO, codigo);		
+		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlObtenerStock,
+				paramSource, Integer.class);
 	}
 
 	@Override
 	public void actualizar(VideoJuego videoJuego) {
-		this.customNamedParameterJdbcTemplate.actualizar(videoJuego, sqlActualizar);		
+		this.customNamedParameterJdbcTemplate.actualizar(videoJuego, sqlActualizar);
 	}
 
 	@Override
 	public void eliminar(Long id) {
-		// TODO Auto-generated method stub
-		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
 	}
 
 	@Override
 	public boolean existeId(Long id) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("id", id);
-		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteId,paramSource, Boolean.class);
+		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteId,
+				paramSource, Boolean.class);
 
 	}
 

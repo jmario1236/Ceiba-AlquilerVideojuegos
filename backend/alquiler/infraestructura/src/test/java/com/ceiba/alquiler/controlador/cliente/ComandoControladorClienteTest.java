@@ -1,11 +1,11 @@
-package com.ceiba.alquiler.controlador.videojuego;
+package com.ceiba.alquiler.controlador.cliente;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import static org.hamcrest.Matchers.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +14,18 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.ceiba.ApplicationMock;
-import com.ceiba.alquiler.comando.ComandoVideoJuego;
-import com.ceiba.alquiler.controlador.testdatabuilder.ComandoVideoJuegoTestDataBuilder;
+import com.ceiba.alquiler.comando.ComandoCliente;
+import com.ceiba.alquiler.controlador.testdatabuilder.ComandoClienteTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = ApplicationMock.class)
-@WebMvcTest(ComandoControladorVideoJuego.class)
-public class ComandoControladorVideoJuegoTest {
-
+@WebMvcTest(ComandoControladorCliente.class)
+public class ComandoControladorClienteTest {
 	@Autowired
 	private ObjectMapper objectMapper;
 
@@ -34,24 +35,24 @@ public class ComandoControladorVideoJuegoTest {
 	@Test
 	public void crear() throws Exception {
 		// arrange
-		ComandoVideoJuego comandoVideoJuego = new ComandoVideoJuegoTestDataBuilder().build();
+		ComandoCliente comando = new ComandoClienteTestDataBuilder().build();
 
 		// act - assert
-		mocMvc.perform(post("/videojuegos").contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(comandoVideoJuego))).andExpect(status().isOk())
-				.andExpect(content().json("{'valor': 2}"));
+		mocMvc.perform(post("/clientes").contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(comando))).andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.valor").value(any(Integer.class)));
 	}
 	
 	@Test
     public void actualizar() throws Exception{
         // arrange
         Long id = 1L;
-        ComandoVideoJuego comandoVideoJuego = new ComandoVideoJuegoTestDataBuilder().conCodigo("MRK-01").build();
-
+        ComandoCliente comando = new ComandoClienteTestDataBuilder().conApellido("TRUMP").conIdentificacion("1598753").build();
+        
         // act - assert
-        mocMvc.perform(put("/videojuegos/{id}",id)
+        mocMvc.perform(put("/clientes/{id}",id)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(comandoVideoJuego)))
+                .content(objectMapper.writeValueAsString(comando)))
                 .andExpect(status().isOk());
     }
 
@@ -62,7 +63,7 @@ public class ComandoControladorVideoJuegoTest {
 
 		// act - assert
 		mocMvc.perform(
-				delete("/videojuegos/{id}", id)
+				delete("/clientes/{id}", id)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
