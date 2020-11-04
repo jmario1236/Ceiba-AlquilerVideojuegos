@@ -17,7 +17,7 @@ public class ServicioActualizarVideoJuego {
 	}
 
 	private void validarExisteVideoJuego(VideoJuego videoJuego) {
-		boolean existe = repositorioVideoJuego.existe(videoJuego.getCodigo());
+		boolean existe = repositorioVideoJuego.existeId(videoJuego.getId());
 		if(!existe) {
 			throw new ExcepcionSinDatos(VIDEOJUEGO_ACTUALIZAR_NO_EXISTE);
 		}

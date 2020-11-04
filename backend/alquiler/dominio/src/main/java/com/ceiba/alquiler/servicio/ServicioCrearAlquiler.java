@@ -40,7 +40,7 @@ public class ServicioCrearAlquiler {
 	
 	private void actualizarStockVideoJuegos(List<AlquilerItem> items) {
 		for(AlquilerItem item : items) {
-			VideoJuego videoJuego = item.getVideoJuego();				
+			VideoJuego videoJuego = repositorioVideoJuego.consultar(item.getVideoJuego().getId());		
 			videoJuego.quitarDelStock(item.getCantidad());
 			repositorioVideoJuego.actualizar(videoJuego);
 		}

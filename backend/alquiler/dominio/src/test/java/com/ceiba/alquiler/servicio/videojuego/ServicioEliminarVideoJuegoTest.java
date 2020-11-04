@@ -19,7 +19,7 @@ public class ServicioEliminarVideoJuegoTest {
 		ServicioEliminarVideoJuego servicio = new ServicioEliminarVideoJuego(repositorio);
 		
 		// act-assert
-		BasePrueba.assertThrows(() -> servicio.ejecutar(videoJuego), ExcepcionSinDatos.class, "Videojuego no existe");
+		BasePrueba.assertThrows(() -> servicio.ejecutar(videoJuego.getId()), ExcepcionSinDatos.class, "Videojuego no existe");
 		
 	}
 }

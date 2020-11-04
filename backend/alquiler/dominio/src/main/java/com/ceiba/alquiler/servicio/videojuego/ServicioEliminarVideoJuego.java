@@ -1,6 +1,6 @@
 package com.ceiba.alquiler.servicio.videojuego;
 
-import com.ceiba.alquiler.modelo.entidad.VideoJuego;
+
 import com.ceiba.alquiler.puerto.repositorio.RepositorioVideoJuego;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 
@@ -12,13 +12,13 @@ public class ServicioEliminarVideoJuego {
 		this.repositorioVideoJuego = repositorioVideoJuego;
 	}
 
-	public void ejecutar(VideoJuego videoJuego) {
-		validarExisteVideoJuego(videoJuego);
-		repositorioVideoJuego.eliminar(videoJuego.getId());
+	public void ejecutar(Long id) {
+		validarExisteVideoJuego(id);
+		repositorioVideoJuego.eliminar(id);
 	}
 
-	private void validarExisteVideoJuego(VideoJuego videoJuego) {
-		boolean existe = repositorioVideoJuego.existe(videoJuego.getCodigo());
+	private void validarExisteVideoJuego(Long id) {
+		boolean existe = repositorioVideoJuego.existeId(id);
 		if(!existe) {
 			throw new ExcepcionSinDatos(VIDEOJUEGO_ACTUALIZAR_NO_EXISTE);
 		}

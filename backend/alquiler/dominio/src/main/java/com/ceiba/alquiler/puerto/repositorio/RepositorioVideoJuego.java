@@ -19,6 +19,13 @@ public interface RepositorioVideoJuego {
     boolean existe(String codigo);
     
     /**
+     * Permite buscar videojuego mediante su id
+     * @param codigo
+     * @return un videojuego
+     */
+    VideoJuego consultar(Long id);
+    
+    /**
      * Permite obtener el stock de un videojuego
      * @param codigo
      * @return true si existe, false si no.
@@ -36,4 +43,11 @@ public interface RepositorioVideoJuego {
      * @param id del videojuego
      */
 	void eliminar(Long id);
+	
+	/**
+     * Permite saber si un videojuego existe mediante su id
+     * @param id
+     * @return true si existe, false si no.
+     */
+	boolean existeId(Long id);
 }

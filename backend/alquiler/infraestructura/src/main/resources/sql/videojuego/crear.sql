@@ -1,0 +1,1 @@
+insert into videojuego (codigo, nombre,genero,precio,stock) values (:codigo, :nombre,:genero,:precio,:stock)

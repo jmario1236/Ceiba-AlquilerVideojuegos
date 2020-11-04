@@ -18,4 +18,24 @@ public interface RepositorioAlquiler {
      */
 	boolean existeAlquilerVigente(String identificacion);
 	
+	/**
+     * Permite el alquiler existe
+     * @param id
+     * @return true si existe, false si no
+     */
+	boolean existe(Long id);
+	
+	/**
+     * Permite consultar un alquiler a traves de su id
+     * @param id
+     * @return alquiler consultado
+     */
+	Alquiler consultar(Long id);
+	
+	/**
+     * Permite el finalizar alquiler 
+     * @param alquilers
+     * 
+     */
+	void finalizar(Alquiler alquiler);
 }
