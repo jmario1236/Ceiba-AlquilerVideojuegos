@@ -32,8 +32,7 @@ public class ConsultarControladorVideoJuegoTest {
 		// act - assert
 		mocMvc.perform(get("/videojuegos")
 				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(1)))
+				.andExpect(status().isOk())				
 				.andExpect(jsonPath("$[0].genero", is("Plataforma")));
 	}
 }
