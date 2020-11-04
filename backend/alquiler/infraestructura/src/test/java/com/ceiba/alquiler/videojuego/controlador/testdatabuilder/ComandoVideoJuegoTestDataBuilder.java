@@ -1,6 +1,6 @@
 package com.ceiba.alquiler.videojuego.controlador.testdatabuilder;
 
-import com.ceiba.alquiler.videojuego.comando.ComandoVideoJuego;
+import com.ceiba.alquiler.comando.ComandoVideoJuego;
 
 public class ComandoVideoJuegoTestDataBuilder {
 	private Long id;
@@ -16,6 +16,11 @@ public class ComandoVideoJuegoTestDataBuilder {
 		genero = "Plataforma";
 		precio = 5000.0;
 		stock = 5;
+	}
+	
+	public ComandoVideoJuegoTestDataBuilder conCodigo(String codigo) {
+		this.codigo = codigo;
+		return this;
 	}
 	
 	public ComandoVideoJuego build() {
