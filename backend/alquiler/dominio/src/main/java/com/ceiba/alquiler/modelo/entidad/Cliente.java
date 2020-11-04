@@ -6,8 +6,8 @@ import static com.ceiba.dominio.ValidadorArgumento.validarNumerico;
 
 @Getter
 public class Cliente {
-	private static final String SE_DEBE_INGRESAR_IDENTIFICACION = "Se debe ingresar identificación";
-	private static final String LA_IDENTIFICACION_DEBE_SER_NUMERICA = "La identificación debe ser numerica";
+	private static final String SE_DEBE_INGRESAR_IDENTIFICACION = "Se debe ingresar identificacion";
+	private static final String LA_IDENTIFICACION_DEBE_SER_NUMERICA = "La identificacion debe ser numerica";
 	private static final String SE_DEBE_INGRESAR_NOMBRE = "Se debe ingresar nombre";
 	private static final String SE_DEBE_INGRESAR_TELEFONO= "Se debe ingresar telefono";
 	private Long id;

@@ -20,7 +20,7 @@ public class Alquiler {
 	private static final String DEBE_INGRESAR_FECHA_ALQUILER = "Debe ingresar fecha de alquiler";
 	private static final String DEBE_INGRESAR_FECHA_MAXIMA_ALQUILER = "Debe ingresar fecha maxima de entrega";
 	private static final String EL_ALQUILER_DEBE_TENER_AL_MENOS_UN_JUEGO = "El alquiler debe tener al menos un juego";
-	private static final String FECHAS_INVALIDA = "Fechas son inválidas";
+	private static final String FECHAS_INVALIDA = "Fechas son invalidas";
 	private static final String FECHA_NO_CUMPLE_MINIMO_DIAS = "Fecha maxima ingresada no cumple con el minimo de dias (3)";
 	private static final String VIGENTE = "VIGENTE";
 	private static final String FINALIZADO = "FINALIZADO";
