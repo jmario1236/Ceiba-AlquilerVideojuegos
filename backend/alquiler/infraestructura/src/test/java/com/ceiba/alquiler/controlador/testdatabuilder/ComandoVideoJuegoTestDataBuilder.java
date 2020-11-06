@@ -23,6 +23,11 @@ public class ComandoVideoJuegoTestDataBuilder {
 		return this;
 	}
 	
+	public ComandoVideoJuegoTestDataBuilder conId(Long id) {
+		this.id = id;
+		return this;
+	}
+	
 	public ComandoVideoJuego build() {
 		return new ComandoVideoJuego(id, codigo, nombre, genero, precio, stock);
 	}

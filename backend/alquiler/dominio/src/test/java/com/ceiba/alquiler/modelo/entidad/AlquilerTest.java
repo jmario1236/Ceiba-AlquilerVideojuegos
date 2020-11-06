@@ -107,7 +107,7 @@ public class AlquilerTest {
 				.build();
 		
 		//act
-		alquiler.agregarItem(videoJuego.getId(), videoJuego, 1);
+		alquiler.agregarItem(null, videoJuego.getId(), 1, videoJuego.getPrecio());
 		
 		
 		// assert
@@ -123,6 +123,7 @@ public class AlquilerTest {
 		Alquiler alquiler = new AlquilerTestDataBuilder()
 				.conFechaMaximaEntrega(fechaFinal)
 				.conFechaAlquiler(fechaInicial)
+				.conId(1L)
 				.build();
 		//act
 		alquiler.cambiarEstadoVigente();

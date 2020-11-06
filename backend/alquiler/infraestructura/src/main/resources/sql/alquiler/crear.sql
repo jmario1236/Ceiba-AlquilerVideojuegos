@@ -1,0 +1,1 @@
+insert into alquiler (id_cliente, fecha_alquiler,fecha_maxima_entrega, estado) values (:idCliente, :fechaAlquiler,:fechaMaximaEntrega, :estado)

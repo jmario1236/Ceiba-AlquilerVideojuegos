@@ -19,7 +19,7 @@ public class ServicioActualizarCliente {
 	}
 
 	private void validarExisteCliente(Cliente cliente) {
-		boolean existe = repositorioCliente.existe(cliente.getIdentificacion());
+		boolean existe = repositorioCliente.existeId(cliente.getId());
 		if(!existe) {
 			throw new ExcepcionSinDatos(EL_CLIENTE_NO_EXISTE);
 		}

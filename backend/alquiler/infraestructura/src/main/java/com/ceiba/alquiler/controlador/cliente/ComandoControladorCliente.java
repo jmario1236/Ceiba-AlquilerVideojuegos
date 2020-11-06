@@ -1,6 +1,7 @@
 package com.ceiba.alquiler.controlador.cliente;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/clientes")
 @Api(tags = { "Controlador comando clientes" })
 public class ComandoControladorCliente {
@@ -35,7 +37,7 @@ public class ComandoControladorCliente {
 		this.manejadorEliminarCliente = manejadorEliminarCliente;
 	}
 	
-	@PostMapping
+	@PostMapping	
     @ApiOperation("Crear Cliente")
 	public ComandoRespuesta<Long> crear(@RequestBody ComandoCliente comando){
 		return manejadorCrearCliente.ejecutar(comando);

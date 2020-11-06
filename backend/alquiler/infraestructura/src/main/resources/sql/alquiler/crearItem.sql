@@ -1,0 +1,1 @@
+insert into alquiler_item (id_alquiler, id_videojuego,cantidad) values (:idAlquiler, :idVideojuego,:cantidad)

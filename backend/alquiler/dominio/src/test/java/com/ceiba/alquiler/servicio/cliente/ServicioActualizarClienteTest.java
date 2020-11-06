@@ -16,7 +16,7 @@ public class ServicioActualizarClienteTest {
 		// arrange
 		Cliente cliente = new ClienteTestDataBuilder().build();
 		RepositorioCliente repositorio = Mockito.mock(RepositorioCliente.class);
-		Mockito.when(repositorio.existe(cliente.getIdentificacion())).thenReturn(false);
+		Mockito.when(repositorio.existeId(cliente.getId())).thenReturn(false);
 		ServicioActualizarCliente servicio = new ServicioActualizarCliente(repositorio);
 		
 		// act-assert

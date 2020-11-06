@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ceiba.alquiler.modelo.entidad.Alquiler;
 import com.ceiba.alquiler.modelo.entidad.AlquilerItem;
-import com.ceiba.alquiler.modelo.entidad.Cliente;
+import com.ceiba.alquiler.modelo.entidad.ClienteId;
 import com.ceiba.alquiler.modelo.entidad.VideoJuego;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioAlquiler;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioCliente;
@@ -21,6 +21,7 @@ public class ServicioCrearAlquiler {
 	private RepositorioAlquiler repositorioAlquiler;
 	private RepositorioCliente repositorioCliente;
 	private RepositorioVideoJuego repositorioVideoJuego;
+	
 
 	public ServicioCrearAlquiler(RepositorioAlquiler repositorioAlquiler,
 			RepositorioCliente repositorioCliente, RepositorioVideoJuego repositorioVideoJuego) {
@@ -35,19 +36,19 @@ public class ServicioCrearAlquiler {
 		validarClienteExiste(alquiler.getCliente());
 		alquiler.cambiarEstadoVigente();
 		actualizarStockVideoJuegos(alquiler.getItems());
-		return repositorioAlquiler.crear(alquiler);		
+		return repositorioAlquiler.crear(alquiler);			
 	}
 	
 	private void actualizarStockVideoJuegos(List<AlquilerItem> items) {
 		for(AlquilerItem item : items) {
-			VideoJuego videoJuego = repositorioVideoJuego.consultar(item.getVideoJuego().getId());		
+			VideoJuego videoJuego = repositorioVideoJuego.consultar(item.getVideoJuego());		
 			videoJuego.quitarDelStock(item.getCantidad());
-			repositorioVideoJuego.actualizar(videoJuego);
+			repositorioVideoJuego.actualizarStock(videoJuego);
 		}
 	}
 	
-	private void validarClienteExiste(Cliente cliente) {
-		boolean existe = repositorioCliente.existe(cliente.getIdentificacion());
+	private void validarClienteExiste(ClienteId cliente) {
+		boolean existe = repositorioCliente.existeId(cliente);
 		if(!existe) {
 			throw new ExcepcionSinDatos(EL_CLIENTE_NO_EXISTE);
 		}
@@ -55,15 +56,15 @@ public class ServicioCrearAlquiler {
 	
 	private void validarVideoJuegosExisten(List<AlquilerItem> items) {
 		for(AlquilerItem item : items) {
-			boolean existe = repositorioVideoJuego.existe(item.getVideoJuego().getCodigo());
+			boolean existe = repositorioVideoJuego.existeId(item.getVideoJuego());
 			if(!existe) {
 				throw new ExcepcionSinDatos(VIDEOJUEGO_NO_EXISTE);
 			}
 		}
 	}
 	
-	private void validarSiClienteTieneAlquilerVigente(Cliente cliente) {
-		boolean tieneVigente = repositorioAlquiler.existeAlquilerVigente(cliente.getIdentificacion());
+	private void validarSiClienteTieneAlquilerVigente(ClienteId cliente) {
+		boolean tieneVigente = repositorioAlquiler.existeAlquilerVigente(cliente);
 		if(tieneVigente) {
 			throw new ExcepcionValorInvalido(CLIENTE_TIENE_UN_ALQUILER_VIGENTE);
 		}

@@ -1,9 +1,10 @@
 package com.ceiba.alquiler.servicio.testdatabuilder;
 
 import com.ceiba.alquiler.modelo.entidad.VideoJuego;
+import com.ceiba.alquiler.modelo.entidad.VideoJuegoId;
 
 public class VideoJuegoTestDataBuilder {
-	private Long id;
+	private VideoJuegoId id;
 	private String codigo;
 	private String nombre;
 	private String genero;
@@ -11,6 +12,7 @@ public class VideoJuegoTestDataBuilder {
 	private int stock;
 	
 	public VideoJuegoTestDataBuilder() {
+		id = new VideoJuegoId(1L);
 		codigo = "PRN-1";
 		nombre = "Mario bros";
 		genero = "Plataforma";
@@ -20,6 +22,11 @@ public class VideoJuegoTestDataBuilder {
 	
 	public VideoJuegoTestDataBuilder conCodigo(String codigo) {
 		this.codigo = codigo; 
+		return this;
+	}
+	
+	public VideoJuegoTestDataBuilder conId(VideoJuegoId id) {
+		this.id = id;
 		return this;
 	}
 	

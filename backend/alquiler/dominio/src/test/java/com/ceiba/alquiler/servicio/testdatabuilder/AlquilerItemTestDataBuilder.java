@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceiba.alquiler.modelo.entidad.AlquilerItem;
-import com.ceiba.alquiler.modelo.entidad.VideoJuego;
+import com.ceiba.alquiler.modelo.entidad.VideoJuegoId;
 
 public class AlquilerItemTestDataBuilder {
 	private Long id;
-	private Long idAlquiler;
-	private VideoJuego videoJuego;
+	private VideoJuegoId videoJuego;
+	private Double precio;
 	private Integer cantidad;
 	
 	public AlquilerItemTestDataBuilder() {
-		videoJuego = new VideoJuegoTestDataBuilder().build();
+		videoJuego = new VideoJuegoTestDataBuilder().build().getId();
 		cantidad = 2;
-		idAlquiler = 1L;
+		precio = 5000.0;
 	}
 	
 	public AlquilerItemTestDataBuilder conId(Long id) {
@@ -28,20 +28,20 @@ public class AlquilerItemTestDataBuilder {
 		return this;
 	}
 	
-	public AlquilerItemTestDataBuilder conVideoJuego(VideoJuego videoJuego) {
+	public AlquilerItemTestDataBuilder conVideoJuegoId(VideoJuegoId videoJuego) {
 		this.videoJuego = videoJuego;
 		return this;
 	}
 	
 	public AlquilerItem build() {
-		return new AlquilerItem(id, videoJuego, cantidad, idAlquiler); 
+		return new AlquilerItem(id, videoJuego, cantidad, precio); 
 	}
 	
 	public List<AlquilerItem> buildList(){
 		List<AlquilerItem> items = new ArrayList<>();
 		items.add(build());
-		items.add(conVideoJuego(new VideoJuegoTestDataBuilder().conCodigo("STN-01").build()).build());
-		items.add(conVideoJuego(new VideoJuegoTestDataBuilder().conCodigo("STN-02").build()).build());
+		items.add(conVideoJuegoId(new VideoJuegoTestDataBuilder().conId(new VideoJuegoId(2L)).conCodigo("STN-01").build().getId()).build());
+		items.add(conVideoJuegoId(new VideoJuegoTestDataBuilder().conId(new VideoJuegoId(3L)).conCodigo("STN-02").build().getId()).build());
 		return items;
 	}
 	

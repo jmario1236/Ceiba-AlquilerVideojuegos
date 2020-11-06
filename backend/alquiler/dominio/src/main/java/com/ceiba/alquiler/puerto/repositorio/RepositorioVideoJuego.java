@@ -1,6 +1,7 @@
 package com.ceiba.alquiler.puerto.repositorio;
 
 import com.ceiba.alquiler.modelo.entidad.VideoJuego;
+import com.ceiba.alquiler.modelo.entidad.VideoJuegoId;
 
 public interface RepositorioVideoJuego {
 	
@@ -23,14 +24,14 @@ public interface RepositorioVideoJuego {
      * @param codigo
      * @return un videojuego
      */
-    VideoJuego consultar(Long id);
+    VideoJuego consultar(VideoJuegoId id);
     
     /**
      * Permite obtener el stock de un videojuego
      * @param codigo
      * @return true si existe, false si no.
      */
-    int obtenerStock(String codigo);
+    int obtenerStock(VideoJuegoId id);
 
     /**
      * Permite actualizar un videojuego
@@ -42,12 +43,19 @@ public interface RepositorioVideoJuego {
      * Permite elimminar un videojuego con su id
      * @param id del videojuego
      */
-	void eliminar(Long id);
+	void eliminar(VideoJuegoId id);
 	
 	/**
      * Permite saber si un videojuego existe mediante su id
      * @param id
      * @return true si existe, false si no.
      */
-	boolean existeId(Long id);
+	boolean existeId(VideoJuegoId id);
+	
+	
+	/**
+     * Permite actualizar el stock de un videojuego
+     * @param videojuego
+     */
+	void actualizarStock(VideoJuego videoJuego);
 }

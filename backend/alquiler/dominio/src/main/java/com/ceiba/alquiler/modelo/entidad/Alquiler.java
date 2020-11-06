@@ -22,6 +22,7 @@ public class Alquiler {
 	private static final String EL_ALQUILER_DEBE_TENER_AL_MENOS_UN_JUEGO = "El alquiler debe tener al menos un juego";
 	private static final String FECHAS_INVALIDA = "Fechas son invalidas";
 	private static final String FECHA_NO_CUMPLE_MINIMO_DIAS = "Fecha maxima ingresada no cumple con el minimo de dias (3)";
+	private static final String NO_SE_PUEDE_FINALIZAR_ALQUILER = "No se puede finalizar el alquiler sin registrar";
 	private static final String VIGENTE = "VIGENTE";
 	private static final String FINALIZADO = "FINALIZADO";
 
@@ -30,7 +31,7 @@ public class Alquiler {
 	private static final double PORCENTAJE_MULTA = 0.2;
 
 	private Long id;
-	private Cliente cliente;
+	private ClienteId cliente;
 	private LocalDate fechaAlquiler;
 	private LocalDate fechaMaximaEntrega;
 	private LocalDate fechaEntrega;
@@ -41,7 +42,7 @@ public class Alquiler {
 	private Double totalMulta;
 	private List<AlquilerItem> items;
 
-	public Alquiler(Long id, Cliente cliente, LocalDate fechaAlquiler, LocalDate fechaMaximaEntrega,
+	public Alquiler(Long id, ClienteId cliente, LocalDate fechaAlquiler, LocalDate fechaMaximaEntrega,
 			List<AlquilerItem> items) {
 		validarObligatorio(cliente, DEBE_HABER_UN_CLIENTE);
 		validarObligatorio(fechaAlquiler, DEBE_INGRESAR_FECHA_ALQUILER);
@@ -60,11 +61,11 @@ public class Alquiler {
 		generarTotal();
 	}
 
-	public void agregarItem(Long id, VideoJuego videojuego, Integer cantidad) {
+	public void agregarItem(Long id, VideoJuegoId videojuego, Integer cantidad, Double precio) {
 		if (items == null) {
 			items = new ArrayList<>();
 		}
-		this.items.add(new AlquilerItem(id, videojuego, cantidad, this.id));
+		this.items.add(new AlquilerItem(id, videojuego, cantidad, precio));
 		generarTotal();
 	}
 
@@ -76,6 +77,9 @@ public class Alquiler {
 	}
 
 	public void finalizarAlquiler() {
+		if(id == null || estado == null) {
+			throw new ExcepcionSinDatos(NO_SE_PUEDE_FINALIZAR_ALQUILER);
+		}
 		this.fechaEntrega = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		this.estado = new Estado(FINALIZADO);
 	}	

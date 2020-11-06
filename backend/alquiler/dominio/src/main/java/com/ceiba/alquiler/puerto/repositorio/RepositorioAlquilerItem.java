@@ -8,5 +8,5 @@ public interface RepositorioAlquilerItem {
      * @param alquilerItem
      * @return el id generado
      */
-	Long crear(AlquilerItem alquilerItem);
+	Long crear(AlquilerItem alquilerItem, Long idAlquiler);
 }

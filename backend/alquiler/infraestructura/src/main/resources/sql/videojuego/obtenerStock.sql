@@ -1,1 +1,1 @@
-select stock from videojuego where codigo = :codigo
+select stock from videojuego where id = :id

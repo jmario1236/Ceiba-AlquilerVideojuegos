@@ -13,7 +13,7 @@ public class ServicioVerificarStockAlquiler {
 	}
 	
 	public boolean ejecutar(AlquilerItem alquilerItem) {
-		int stock = repositorioVideoJuego.obtenerStock(alquilerItem.getVideoJuego().getCodigo());
+		int stock = repositorioVideoJuego.obtenerStock(alquilerItem.getVideoJuego());
 		return stock >= alquilerItem.getCantidad();
 	}
 

@@ -1,6 +1,7 @@
 package com.ceiba.alquiler.puerto.repositorio;
 
 import com.ceiba.alquiler.modelo.entidad.Cliente;
+import com.ceiba.alquiler.modelo.entidad.ClienteId;
 
 public interface RepositorioCliente {
 	 /**
@@ -27,12 +28,12 @@ public interface RepositorioCliente {
      * Permite eliminar un cliente
      * @param id
      */
-    void eliminar(Long id);
+    void eliminar(ClienteId id);
 
     /**
      * Permite saber si un cliente existe mediante su id
      * @param id
      * @return true si existe, false si no.
      */
-	boolean existeId(Long id);
+	boolean existeId(ClienteId id);
 }

@@ -15,7 +15,7 @@ public class ServicioActualizarVideoJuegoTest {
 		// arrange
 		VideoJuego videoJuego = new VideoJuegoTestDataBuilder().build();
 		RepositorioVideoJuego repositorio = Mockito.mock(RepositorioVideoJuego.class);
-		Mockito.when(repositorio.existe(videoJuego.getCodigo())).thenReturn(false);
+		Mockito.when(repositorio.existeId(videoJuego.getId())).thenReturn(false);
 		ServicioActualizarVideoJuego servicio = new ServicioActualizarVideoJuego(repositorio);
 		
 		// act-assert

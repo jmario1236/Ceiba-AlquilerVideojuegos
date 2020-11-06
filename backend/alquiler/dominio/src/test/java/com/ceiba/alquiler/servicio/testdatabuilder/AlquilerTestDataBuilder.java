@@ -6,23 +6,23 @@ import java.util.List;
 
 import com.ceiba.alquiler.modelo.entidad.Alquiler;
 import com.ceiba.alquiler.modelo.entidad.AlquilerItem;
-import com.ceiba.alquiler.modelo.entidad.Cliente;
+import com.ceiba.alquiler.modelo.entidad.ClienteId;
 
 public class AlquilerTestDataBuilder {
 	private Long id;
-	private Cliente cliente;
+	private ClienteId cliente;
 	private LocalDate fechaAlquiler;
 	private LocalDate fechaMaximaEntrega;
 	private List<AlquilerItem> items;
 	
 	public AlquilerTestDataBuilder() {
-		cliente = new ClienteTestDataBuilder().build();
+		cliente = new ClienteTestDataBuilder().build().getId();
 		fechaAlquiler = LocalDate.parse("2020-11-03");
 		fechaMaximaEntrega = LocalDate.parse("2020-11-06");		
 		items = new AlquilerItemTestDataBuilder().buildList();
 	}
 	
-	public AlquilerTestDataBuilder conCliente(Cliente cliente) {
+	public AlquilerTestDataBuilder conCliente(ClienteId cliente) {
 		this.cliente = cliente;
 		return this;
 	}

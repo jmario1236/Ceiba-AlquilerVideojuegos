@@ -4,6 +4,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.ceiba.alquiler.modelo.entidad.VideoJuego;
+import com.ceiba.alquiler.modelo.entidad.VideoJuegoId;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioVideoJuego;
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
@@ -13,6 +14,8 @@ public class RepositorioVideoJuegoH2 implements RepositorioVideoJuego {
 
 	private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 	private static final String CODIGO = "codigo";
+	private static final String ID = "id";
+	private static final String STOCK = "stock";
 
 	@SqlStatement(namespace = "videojuego", value = "crear")
 	private static String sqlCrear;
@@ -25,6 +28,9 @@ public class RepositorioVideoJuegoH2 implements RepositorioVideoJuego {
 
 	@SqlStatement(namespace = "videojuego", value = "actualizar")
 	private static String sqlActualizar;
+	
+	@SqlStatement(namespace = "videojuego", value = "actualizarStock")
+	private static String sqlActualizarStock;
 
 	@SqlStatement(namespace = "videojuego", value = "consultar")
 	private static String sqlConsultar;
@@ -53,46 +59,61 @@ public class RepositorioVideoJuegoH2 implements RepositorioVideoJuego {
 	}
 
 	@Override
-	public VideoJuego consultar(Long id) {
+	public VideoJuego consultar(VideoJuegoId id) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("id", id);
+		paramSource.addValue("id", id.getId());
 		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlConsultar,
-				paramSource, (rs, rowNum) -> new VideoJuego(rs.getLong("id"), 
+				paramSource, (rs, rowNum) -> new VideoJuego(new VideoJuegoId(rs.getLong(ID)), 
 															rs.getString(CODIGO),
 															rs.getString("nombre"), 
 															rs.getString("genero"), 
 															rs.getDouble("precio"), 
-															rs.getInt("stock")));
+															rs.getInt(STOCK)));
 
 	}
 
 	@Override
-	public int obtenerStock(String codigo) {
+	public int obtenerStock(VideoJuegoId id) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue(CODIGO, codigo);		
+		paramSource.addValue(ID, id.getId());		
 		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlObtenerStock,
 				paramSource, Integer.class);
 	}
 
 	@Override
 	public void actualizar(VideoJuego videoJuego) {
-		this.customNamedParameterJdbcTemplate.actualizar(videoJuego, sqlActualizar);
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue(ID, videoJuego.getId().getId());
+		paramSource.addValue("nombre", videoJuego.getNombre());
+		paramSource.addValue(CODIGO, videoJuego.getCodigo());
+		paramSource.addValue("genero", videoJuego.getGenero());
+		paramSource.addValue("precio", videoJuego.getPrecio());
+		paramSource.addValue(STOCK, videoJuego.getStock());
+		this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlActualizar, paramSource);
 	}
 
 	@Override
-	public void eliminar(Long id) {
+	public void eliminar(VideoJuegoId id) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", id);
+        paramSource.addValue(ID, id.getId());
         this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
 	}
 
 	@Override
-	public boolean existeId(Long id) {
+	public boolean existeId(VideoJuegoId id) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("id", id);
+		paramSource.addValue(ID, id.getId());
 		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteId,
 				paramSource, Boolean.class);
 
+	}
+
+	@Override
+	public void actualizarStock(VideoJuego videoJuego) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue(ID, videoJuego.getId().getId());
+		paramSource.addValue(STOCK, videoJuego.getStock());
+		this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlActualizarStock, paramSource);
 	}
 
 }

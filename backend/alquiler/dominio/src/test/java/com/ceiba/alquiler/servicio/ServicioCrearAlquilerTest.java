@@ -10,6 +10,8 @@ import org.mockito.Mockito;
 import com.ceiba.BasePrueba;
 import com.ceiba.alquiler.modelo.entidad.Alquiler;
 import com.ceiba.alquiler.modelo.entidad.AlquilerItem;
+import com.ceiba.alquiler.modelo.entidad.ClienteId;
+import com.ceiba.alquiler.modelo.entidad.VideoJuegoId;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioAlquiler;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioCliente;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioVideoJuego;
@@ -37,11 +39,11 @@ public class ServicioCrearAlquilerTest {
 		repositorioCliente = Mockito.mock(RepositorioCliente.class);
 		repositorioVideoJuego = Mockito.mock(RepositorioVideoJuego.class);
 		Mockito.when(repositorioAlquiler.crear(alquiler)).thenReturn(1L);
-		Mockito.when(repositorioCliente.existe(Mockito.anyString())).thenReturn(true);
-		Mockito.when(repositorioVideoJuego.existe(Mockito.anyString())).thenReturn(true);
-		Mockito.when(repositorioVideoJuego.consultar(Mockito.anyLong())).thenReturn(
+		Mockito.when(repositorioCliente.existeId(Mockito.any(ClienteId.class))).thenReturn(true);
+		Mockito.when(repositorioVideoJuego.existeId(Mockito.any(VideoJuegoId.class))).thenReturn(true);
+		Mockito.when(repositorioVideoJuego.consultar(Mockito.any(VideoJuegoId.class))).thenReturn(
 				new VideoJuegoTestDataBuilder().build(), new VideoJuegoTestDataBuilder().build(), new VideoJuegoTestDataBuilder().build());
-		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente().getIdentificacion())).thenReturn(false);
+		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente())).thenReturn(false);
 		ServicioCrearAlquiler servicio = new ServicioCrearAlquiler(repositorioAlquiler, repositorioCliente, repositorioVideoJuego);
 		
 		//act
@@ -58,10 +60,10 @@ public class ServicioCrearAlquilerTest {
 		repositorioAlquiler = Mockito.mock(RepositorioAlquiler.class);
 		repositorioCliente = Mockito.mock(RepositorioCliente.class);
 		repositorioVideoJuego = Mockito.mock(RepositorioVideoJuego.class);
-		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente().getIdentificacion())).thenReturn(true);
+		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente())).thenReturn(true);
 		Mockito.when(repositorioAlquiler.crear(alquiler)).thenReturn(1L);
-		Mockito.when(repositorioCliente.existe(Mockito.anyString())).thenReturn(true);
-		Mockito.when(repositorioVideoJuego.existe(Mockito.anyString())).thenReturn(true);
+		Mockito.when(repositorioCliente.existeId(Mockito.any(ClienteId.class))).thenReturn(true);
+		Mockito.when(repositorioVideoJuego.existeId(Mockito.any(VideoJuegoId.class))).thenReturn(true);
 		ServicioCrearAlquiler servicio = new ServicioCrearAlquiler(repositorioAlquiler, repositorioCliente, repositorioVideoJuego);
 		
 		// act-assert
@@ -76,10 +78,10 @@ public class ServicioCrearAlquilerTest {
 		repositorioAlquiler = Mockito.mock(RepositorioAlquiler.class);
 		repositorioCliente = Mockito.mock(RepositorioCliente.class);
 		repositorioVideoJuego = Mockito.mock(RepositorioVideoJuego.class);
-		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente().getIdentificacion())).thenReturn(false);
+		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente())).thenReturn(false);
 		Mockito.when(repositorioAlquiler.crear(alquiler)).thenReturn(1L);
-		Mockito.when(repositorioCliente.existe(Mockito.anyString())).thenReturn(false);
-		Mockito.when(repositorioVideoJuego.existe(Mockito.anyString())).thenReturn(true);
+		Mockito.when(repositorioCliente.existeId(Mockito.any(ClienteId.class))).thenReturn(false);
+		Mockito.when(repositorioVideoJuego.existeId(Mockito.any(VideoJuegoId.class))).thenReturn(true);
 		ServicioCrearAlquiler servicio = new ServicioCrearAlquiler(repositorioAlquiler, repositorioCliente, repositorioVideoJuego);
 		
 		// act-assert
@@ -94,10 +96,10 @@ public class ServicioCrearAlquilerTest {
 		repositorioAlquiler = Mockito.mock(RepositorioAlquiler.class);
 		repositorioCliente = Mockito.mock(RepositorioCliente.class);
 		repositorioVideoJuego = Mockito.mock(RepositorioVideoJuego.class);
-		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente().getIdentificacion())).thenReturn(false);
+		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente())).thenReturn(false);
 		Mockito.when(repositorioAlquiler.crear(alquiler)).thenReturn(1L);
-		Mockito.when(repositorioCliente.existe(Mockito.anyString())).thenReturn(true);
-		Mockito.when(repositorioVideoJuego.existe(Mockito.anyString())).thenReturn(false);
+		Mockito.when(repositorioCliente.existeId(Mockito.any(ClienteId.class))).thenReturn(true);
+		Mockito.when(repositorioVideoJuego.existeId(Mockito.any(VideoJuegoId.class))).thenReturn(false);
 		ServicioCrearAlquiler servicio = new ServicioCrearAlquiler(repositorioAlquiler, repositorioCliente, repositorioVideoJuego);
 		
 		// act-assert
@@ -113,11 +115,11 @@ public class ServicioCrearAlquilerTest {
 		repositorioAlquiler = Mockito.mock(RepositorioAlquiler.class);
 		repositorioCliente = Mockito.mock(RepositorioCliente.class);
 		repositorioVideoJuego = Mockito.mock(RepositorioVideoJuego.class);
-		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente().getIdentificacion())).thenReturn(false);
+		Mockito.when(repositorioAlquiler.existeAlquilerVigente(alquiler.getCliente())).thenReturn(false);
 		Mockito.when(repositorioAlquiler.crear(alquiler)).thenReturn(1L);
-		Mockito.when(repositorioCliente.existe(Mockito.anyString())).thenReturn(true);
-		Mockito.when(repositorioVideoJuego.existe(Mockito.anyString())).thenReturn(true);
-		Mockito.when(repositorioVideoJuego.consultar(Mockito.anyLong())).thenReturn(new VideoJuegoTestDataBuilder().build());
+		Mockito.when(repositorioCliente.existeId(Mockito.any(ClienteId.class))).thenReturn(true);
+		Mockito.when(repositorioVideoJuego.existeId(Mockito.any(VideoJuegoId.class))).thenReturn(true);
+		Mockito.when(repositorioVideoJuego.consultar(Mockito.any(VideoJuegoId.class))).thenReturn(new VideoJuegoTestDataBuilder().build());
 		ServicioCrearAlquiler servicio = new ServicioCrearAlquiler(repositorioAlquiler, repositorioCliente, repositorioVideoJuego);
 		
 		// act-assert

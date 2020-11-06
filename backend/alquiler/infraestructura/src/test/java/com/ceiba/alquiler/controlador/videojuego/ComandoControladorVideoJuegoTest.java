@@ -1,9 +1,9 @@
 package com.ceiba.alquiler.controlador.videojuego;
 
+import static org.hamcrest.Matchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Test;
@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.ceiba.ApplicationMock;
 import com.ceiba.alquiler.comando.ComandoVideoJuego;
@@ -39,13 +40,13 @@ public class ComandoControladorVideoJuegoTest {
 		// act - assert
 		mocMvc.perform(post("/videojuegos").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(comandoVideoJuego))).andExpect(status().isOk())
-				.andExpect(content().json("{'valor': 2}"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.valor").value(any(Integer.class)));
 	}
 	
 	@Test
     public void actualizar() throws Exception{
         // arrange
-        Long id = 1L;
+        Long id = 2L;
         ComandoVideoJuego comandoVideoJuego = new ComandoVideoJuegoTestDataBuilder().conCodigo("MRK-01").build();
 
         // act - assert

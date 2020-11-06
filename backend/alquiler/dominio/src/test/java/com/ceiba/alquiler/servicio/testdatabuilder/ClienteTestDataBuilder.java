@@ -1,9 +1,10 @@
 package com.ceiba.alquiler.servicio.testdatabuilder;
 
 import com.ceiba.alquiler.modelo.entidad.Cliente;
+import com.ceiba.alquiler.modelo.entidad.ClienteId;
 
 public class ClienteTestDataBuilder {
-	private Long id;
+	private ClienteId id;
 	private String identificacion;
 	private String nombre;
 	private String apellido;
@@ -11,6 +12,7 @@ public class ClienteTestDataBuilder {
 	private String direccion;
 	
 	public ClienteTestDataBuilder() {
+		id = new ClienteId(1L);
 		identificacion = "1143354930";
 		nombre = "Nombreprueba";
 		apellido ="Apellidoprueba";

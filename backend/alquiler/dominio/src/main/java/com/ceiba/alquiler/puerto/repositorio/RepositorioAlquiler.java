@@ -1,6 +1,7 @@
 package com.ceiba.alquiler.puerto.repositorio;
 
 import com.ceiba.alquiler.modelo.entidad.Alquiler;
+import com.ceiba.alquiler.modelo.entidad.ClienteId;
 
 public interface RepositorioAlquiler {
 
@@ -16,7 +17,7 @@ public interface RepositorioAlquiler {
      * @param identificacion
      * @return true si existe, false si no
      */
-	boolean existeAlquilerVigente(String identificacion);
+	boolean existeAlquilerVigente(ClienteId cliente);
 	
 	/**
      * Permite el alquiler existe

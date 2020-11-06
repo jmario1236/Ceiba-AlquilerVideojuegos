@@ -19,10 +19,26 @@ create table cliente (
 );
 
 
-/*create table usuario (
+create table alquiler (
  id int(11) not null auto_increment,
- nombre varchar(100) not null,
- clave varchar(45) not null,
- fecha_creacion datetime null,
+ id_cliente int(11) not null,
+ fecha_alquiler date not null,
+ fecha_maxima_entrega date null,
+ fecha_entrega date null,
+ estado varchar(20) null,
+ total double null,
+ subtotal double null,
+ total_adicional double null,
+ total_multa double null,
  primary key (id)
-);*/
+);
+
+
+create table alquiler_item (
+ id int(11) not null auto_increment,
+ id_alquiler int(11) not null,
+ id_videojuego int(11) not null,
+ cantidad int not null,
+ primary key (id)
+);
+

@@ -18,6 +18,11 @@ public class ComandoClienteTestDataBuilder {
 		direccion = "Centro";
 	}
 	
+	public ComandoClienteTestDataBuilder conId(Long id) {
+		this.id = id;
+		return this;
+	}
+	
 	public ComandoClienteTestDataBuilder conIdentificacion(String identificion) {
 		this.identificacion = identificion;
 		return this;

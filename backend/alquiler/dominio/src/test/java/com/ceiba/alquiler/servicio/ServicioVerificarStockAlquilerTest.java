@@ -16,7 +16,7 @@ public class ServicioVerificarStockAlquilerTest {
 		//arrange
 		AlquilerItem alquilerItem = new AlquilerItemTestDataBuilder().build();
 		RepositorioVideoJuego repositorioVideoJuego = Mockito.mock(RepositorioVideoJuego.class);
-		Mockito.when(repositorioVideoJuego.obtenerStock(alquilerItem.getVideoJuego().getCodigo())).thenReturn(2);
+		Mockito.when(repositorioVideoJuego.obtenerStock(alquilerItem.getVideoJuego())).thenReturn(2);
 		ServicioVerificarStockAlquiler servicio = new ServicioVerificarStockAlquiler(repositorioVideoJuego);
 		//act
 		boolean hayStock = servicio.ejecutar(alquilerItem);
@@ -29,7 +29,7 @@ public class ServicioVerificarStockAlquilerTest {
 		//arrange
 		AlquilerItem alquilerItem = new AlquilerItemTestDataBuilder().build();
 		RepositorioVideoJuego repositorioVideoJuego = Mockito.mock(RepositorioVideoJuego.class);
-		Mockito.when(repositorioVideoJuego.obtenerStock(alquilerItem.getVideoJuego().getCodigo())).thenReturn(1);
+		Mockito.when(repositorioVideoJuego.obtenerStock(alquilerItem.getVideoJuego())).thenReturn(1);
 		ServicioVerificarStockAlquiler servicio = new ServicioVerificarStockAlquiler(repositorioVideoJuego);
 		//act
 		boolean hayStock = servicio.ejecutar(alquilerItem);

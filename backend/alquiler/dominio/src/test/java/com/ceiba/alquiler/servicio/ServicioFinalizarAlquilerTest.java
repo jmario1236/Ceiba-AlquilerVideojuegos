@@ -32,12 +32,13 @@ public class ServicioFinalizarAlquilerTest {
 	@Test
 	public void ejecutarTest() {
 		//arrange
-		Alquiler alquiler = new AlquilerTestDataBuilder().build();
+		Alquiler alquiler = new AlquilerTestDataBuilder().conId(1L).build();
 		repositorioAlquiler = Mockito.mock(RepositorioAlquiler.class);			
 		Mockito.when(repositorioAlquiler.existe(alquiler.getId())).thenReturn(true);
 		Mockito.when(repositorioAlquiler.consultar(alquiler.getId())).thenReturn(alquiler);
 		ServicioFinalizarAlquiler servicio = new ServicioFinalizarAlquiler(repositorioAlquiler);		
 		//act 
+		alquiler.cambiarEstadoVigente();
 		servicio.ejecutar(alquiler);
 		
 		//assert

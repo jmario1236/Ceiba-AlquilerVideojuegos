@@ -46,7 +46,7 @@ public class ComandoControladorClienteTest {
 	@Test
     public void actualizar() throws Exception{
         // arrange
-        Long id = 1L;
+        Long id = 2L;
         ComandoCliente comando = new ComandoClienteTestDataBuilder().conApellido("TRUMP").conIdentificacion("1598753").build();
         
         // act - assert

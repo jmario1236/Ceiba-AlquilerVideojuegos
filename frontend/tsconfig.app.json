@@ -14,8 +14,14 @@
       "@home/*": [
         "src/app/feature/home/*"
       ],
+      "@clientes/*": [
+        "src/app/feature/clientes/*"
+      ],
       "@producto/*": [
         "src/app/feature/producto/*"
+      ],
+      "@videojuegos/*": [
+        "src/app/feature/videojuegos/*"
       ],
       "@shared/*": [
         "src/app/shared/*"

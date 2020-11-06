@@ -1,7 +1,9 @@
 package com.ceiba.configuracion;
 
+import com.ceiba.alquiler.puerto.repositorio.RepositorioAlquiler;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioCliente;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioVideoJuego;
+import com.ceiba.alquiler.servicio.ServicioCrearAlquiler;
 import com.ceiba.alquiler.servicio.cliente.ServicioActualizarCliente;
 import com.ceiba.alquiler.servicio.cliente.ServicioCrearCliente;
 import com.ceiba.alquiler.servicio.cliente.ServicioEliminarCliente;
@@ -44,4 +46,8 @@ public class BeanServicio {
     	return new ServicioActualizarCliente(repositorioCliente);
     }
 
+    @Bean
+    public ServicioCrearAlquiler servicioCrearAlquiler (RepositorioAlquiler repositorioAlquiler, RepositorioCliente repositorioCliente, RepositorioVideoJuego repositorioVideoJuego) {
+    	return new ServicioCrearAlquiler(repositorioAlquiler, repositorioCliente, repositorioVideoJuego);
+    }
 }
