@@ -1,1 +1,52 @@
-<p>registrar works!</p>
+<div class="container">
+    <div class="row">
+        <h1>Registrar Videojuego</h1>
+    </div>
+    <div class="row">
+        <ngb-alert #errorAlert *ngIf="errorMensaje" type="danger" (closed)="errorMensaje = ''">{{ errorMensaje }}
+        </ngb-alert>
+        <ngb-alert #successAlert *ngIf="exitoMensaje" type="success" (closed)="exitoMensaje = ''">{{ exitoMensaje }}
+        </ngb-alert>
+    </div>
+    
+    <div class="row">
+        <form [formGroup]="videojuegoForm" (ngSubmit)="ejecutar()" class="container">
+            <input validar type="hidden" id="idVideojuego" name="id" formControlName="id"> 
+            <div class="form-group">
+              <label for="codigoVideojuego">Codigo</label>    
+              <input validar type="text" id="codigoVideojuego" name="codigo" placeholder="Ingrese Codigo" class="form-control"
+                  formControlName="codigo">    
+            </div>
+          
+            <div class="form-group">
+              <label for="nombreVideojuego">Nombre</label>    
+              <input validar type="text" id="nombreVideojuego" name="nombre" placeholder="Ingrese nombre" class="form-control"
+                  formControlName="nombre">    
+            </div>
+          
+            <div class="form-group">
+              <label for="generoVideojuego">Genero</label>    
+              <input validar type="text" id="generoVideojuego" name="genero" placeholder="Ingrese genero" class="form-control"
+                  formControlName="genero">    
+            </div>
+          
+            <div class="form-group">
+              <label for="precioVideojuego">Precio</label>    
+              <input validar type="number" id="precioVideojuego" name="precio" placeholder="Ingrese precio" class="form-control"
+                  formControlName="precio">    
+            </div>
+          
+            <div class="form-group">
+              <label for="stockVideojuego">Stock</label>    
+              <input validar type="text" id="stockVideojuego" name="stock" placeholder="Ingrese stock" class="form-control"
+                  formControlName="stock">    
+            </div>
+            <button type="submit" class="btn btn-primary" *ngIf="!videojuego">Registrar</button>
+            <button type="submit" class="btn btn-primary" *ngIf="videojuego">Modificar</button>
+            <button class="btn btn-secondary mx-2" (click)="irListado()">Cancelar</button>
+          </form>
+    </div>
+</div>
+
+
+

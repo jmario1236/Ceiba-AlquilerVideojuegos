@@ -9,10 +9,9 @@ import { MenuItem } from '@core/modelo/menu-item';
 export class AppComponent {
   title = 'Alquiler de videojuegos';
   public companies: MenuItem[] = [
-    { url: '/home', nombre: 'home' },
-    { url: '/producto', nombre: 'producto' },
-    { url: '/clientes', nombre: 'Clientes' }
-    
+    { url: '/home', nombre: 'Inicio' },    
+    { url: '/clientes', nombre: 'Clientes' },
+    { url: '/videojuegos', nombre: 'Videojuegos' }
   ];
 
   
