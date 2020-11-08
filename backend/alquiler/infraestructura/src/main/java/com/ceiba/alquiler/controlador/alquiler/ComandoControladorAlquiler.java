@@ -1,6 +1,7 @@
 package com.ceiba.alquiler.controlador.alquiler;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/alquileres")
+@CrossOrigin(origins = "http://localhost:4200")
 @Api(tags = { "Controlador comando de alquileres" })
 public class ComandoControladorAlquiler {
 

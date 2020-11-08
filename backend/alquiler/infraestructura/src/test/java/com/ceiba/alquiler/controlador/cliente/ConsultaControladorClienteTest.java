@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,28 @@ public class ConsultaControladorClienteTest {
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())				
 				.andExpect(jsonPath("$[0].direccion", is("Centro")));
+	}
+	
+	
+	@Test
+	public void consultar() throws Exception {
+		// arrange
+		String criterio = "truc";
+		// act - assert
+		mocMvc.perform(get("/clientes/consultar/{criterio}",criterio)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())				
+				.andExpect(jsonPath("$[0].apellido", is("Jay")));
+	}
+	
+	@Test
+	public void consultarMultiple() throws Exception {
+		// arrange
+		String criterio = "al";
+		// act - assert
+		mocMvc.perform(get("/clientes/consultar/{criterio}",criterio)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())				
+				.andExpect(jsonPath("$", Matchers.hasSize(2)));
 	}
 }

@@ -6,10 +6,11 @@ import { SharedModule } from '@shared/shared.module';
 import { ClientesRoutingModule } from './clientes-routing.module';
 import { ClienteService } from './shared/service/cliente.service';
 import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import { BuscadorComponent } from './components/buscador/buscador.component';
 
 
 @NgModule({
-  declarations: [RegistrarComponent, ListarComponent],
+  declarations: [RegistrarComponent, ListarComponent, BuscadorComponent],
   imports: [
     CommonModule,  
     ClientesRoutingModule,

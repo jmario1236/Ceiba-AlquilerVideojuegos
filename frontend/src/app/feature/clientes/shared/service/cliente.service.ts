@@ -25,4 +25,9 @@ export class ClienteService {
   public actualizar(cliente:Cliente){
     return this.http.doPut<Cliente,any>(`${environment.endpoint}${this.clientes}/${cliente.id}`,cliente);
   }
+
+  public buscar(criterio:string){
+    return this.http.doGet<Cliente[]>(`${environment.endpoint}${this.clientes}/consultar/${criterio}`);
+  }
+
 }

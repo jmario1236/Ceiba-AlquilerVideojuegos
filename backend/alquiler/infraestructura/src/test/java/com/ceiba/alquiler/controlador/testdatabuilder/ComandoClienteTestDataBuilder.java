@@ -12,7 +12,7 @@ public class ComandoClienteTestDataBuilder {
 	
 	public ComandoClienteTestDataBuilder() {
 		identificacion = "1143354928";
-		nombre = "Nombreprueba";
+		nombre = "Alma prueba";
 		apellido ="Apellidoprueba";
 		telefono ="000000";
 		direccion = "Centro";

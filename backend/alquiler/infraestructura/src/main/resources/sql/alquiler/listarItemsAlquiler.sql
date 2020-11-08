@@ -1,0 +1,1 @@
+select id, id_videojuego, cantidad from alquiler_item where id_alquiler = :id_alquiler
