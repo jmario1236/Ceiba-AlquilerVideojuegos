@@ -12,7 +12,7 @@ public class ComandoVideoJuegoTestDataBuilder {
 	
 	public ComandoVideoJuegoTestDataBuilder() {
 		codigo = "PRN-1";
-		nombre = "Mario bros";
+		nombre = "Rabbit bros 2x";
 		genero = "Plataforma";
 		precio = 5000.0;
 		stock = 5;
