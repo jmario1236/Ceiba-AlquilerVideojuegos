@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClienteService } from '@clientes/shared/service/cliente.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -14,6 +14,8 @@ export class BuscadorComponent implements OnInit {
   clienteOptionForm: FormGroup;
   clientesResultado:Array<any>;
   cliente:any;
+
+  @Output() onLoadCliente = new EventEmitter();
   
 
   @ViewChild('content', {static:false}) content: ElementRef;
@@ -22,6 +24,10 @@ export class BuscadorComponent implements OnInit {
 
   ngOnInit(): void {
     this.construirFormulario();
+    this.clienteBuscadorForm.controls.nombre.disable();
+    this.clienteBuscadorForm.controls.apellido.disable();
+    this.clienteBuscadorForm.controls.direccion.disable();
+    this.clienteBuscadorForm.controls.telefono.disable();
   }
 
   buscar(){
@@ -37,6 +43,7 @@ export class BuscadorComponent implements OnInit {
   }
 
   private cargarDatosACampos(dato:any){
+    this.onLoadCliente.emit(dato);
     this.clienteBuscadorForm.setValue({
       nombre:dato.nombre,
       apellido:dato.apellido,

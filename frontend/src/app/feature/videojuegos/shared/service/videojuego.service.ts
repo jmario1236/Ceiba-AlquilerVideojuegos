@@ -24,4 +24,8 @@ export class VideojuegoService {
     return this.http.doPut<VideoJuego,any>(`${environment.endpoint}${this.videojuegos}/${videojuegos.id}`,videojuegos);
   }
 
+  public buscar(criterio:string){
+    return this.http.doGet<VideoJuego[]>(`${environment.endpoint}${this.videojuegos}/consultar/${criterio}`);
+  }
+
 }

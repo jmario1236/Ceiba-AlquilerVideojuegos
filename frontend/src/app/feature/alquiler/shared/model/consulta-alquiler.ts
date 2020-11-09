@@ -7,7 +7,7 @@ export class ConsultaAlquiler {
     estado: string;
     total: number;
     subtotal:number;
-    totalAdicional:number;
+    totalAdiccional:number;
     totalMulta:number;
     cliente:any;
     items:Array<ConsultaAlquilerItem>;
@@ -32,7 +32,7 @@ export class ConsultaAlquiler {
         this.estado = estado;
         this.total = total;
         this.subtotal = subtotal;
-        this.totalAdicional = totalAdicional;
+        this.totalAdiccional = totalAdicional;
         this.totalMulta = totalMulta;
         this.cliente = cliente;
         this.items = items;

@@ -3,14 +3,14 @@ import {ComandoAlquilerItem} from './comando-alquiler-item';
 
 export class ComandoAlquiler {
     id:number;
-    fechaAlquiler:Date;
-    fechaMaximaEntrega:Date;
+    fechaAlquiler:string;
+    fechaMaximaEntrega:string;
     cliente:number;
     items:Array<ComandoAlquilerItem>;
     constructor(
         id:number,
-        fechaAlquiler:Date,
-        fechaMaximaEntrega:Date,
+        fechaAlquiler:string,
+        fechaMaximaEntrega:string,
         cliente:number,
         items:Array<ComandoAlquilerItem>
         ) {

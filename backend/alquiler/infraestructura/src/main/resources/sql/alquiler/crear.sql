@@ -1,1 +1,2 @@
-insert into alquiler (id_cliente, fecha_alquiler,fecha_maxima_entrega, estado) values (:idCliente, :fechaAlquiler,:fechaMaximaEntrega, :estado)
+insert into alquiler (id_cliente, fecha_alquiler,fecha_maxima_entrega, estado, total, subtotal, total_adicional, total_multa) 
+values (:idCliente, :fechaAlquiler,:fechaMaximaEntrega, :estado, :total, :subtotal, :totalAdicional, :totalMulta)

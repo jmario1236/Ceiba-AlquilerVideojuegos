@@ -32,12 +32,7 @@ public class DaoAlquilerH2 implements DaoAlquiler, MapperResult {
 		this.daoVideoJuego = daoVideoJuego;
 	}
 
-	@Override
-	public List<DtoAlquiler> listar() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public DtoAlquiler consultarPorCliente(Long id) {
 		List<DtoAlquilerItem> items = null;
@@ -67,10 +62,5 @@ public class DaoAlquilerH2 implements DaoAlquiler, MapperResult {
 		return alquiler;
 	}
 
-	@Override
-	public DtoAlquiler consultar(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

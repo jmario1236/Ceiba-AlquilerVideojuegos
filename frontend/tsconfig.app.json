@@ -23,6 +23,9 @@
       "@videojuegos/*": [
         "src/app/feature/videojuegos/*"
       ],
+      "@alquiler/*": [
+        "src/app/feature/alquiler/*"
+      ],
       "@shared/*": [
         "src/app/shared/*"
       ]

@@ -17,6 +17,7 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
     SharedModule,
     NgbAlertModule
   ],
+  exports:[BuscadorComponent],
   providers: [ClienteService]
 })
 export class ClientesModule { }

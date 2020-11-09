@@ -38,6 +38,10 @@ public class RepositorioAlquilerH2 implements RepositorioAlquiler{
 		paramSource.addValue("fechaAlquiler", alquiler.getFechaAlquiler());
 		paramSource.addValue("fechaMaximaEntrega", alquiler.getFechaMaximaEntrega());
 		paramSource.addValue("estado", alquiler.getEstado().getValue());
+		paramSource.addValue("total", alquiler.getTotal());
+		paramSource.addValue("subtotal", alquiler.getSubtotal());
+		paramSource.addValue("totalAdicional", alquiler.getTotalAdiccional());
+		paramSource.addValue("totalMulta", alquiler.getTotalMulta());
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlCrear, paramSource,keyHolder,new String[] { "id" });
 		Number key = keyHolder.getKey();
@@ -67,20 +71,17 @@ public class RepositorioAlquilerH2 implements RepositorioAlquiler{
 
 	@Override
 	public boolean existe(Long id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public Alquiler consultar(Long id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void finalizar(Alquiler alquiler) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 }
