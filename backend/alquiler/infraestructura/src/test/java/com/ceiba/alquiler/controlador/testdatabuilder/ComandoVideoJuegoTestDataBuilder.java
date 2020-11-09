@@ -23,6 +23,11 @@ public class ComandoVideoJuegoTestDataBuilder {
 		return this;
 	}
 	
+	public ComandoVideoJuegoTestDataBuilder conNombre(String nombre) {
+		this.nombre = nombre;
+		return this;
+	}
+	
 	public ComandoVideoJuegoTestDataBuilder conId(Long id) {
 		this.id = id;
 		return this;

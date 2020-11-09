@@ -35,7 +35,7 @@ public class ComandoControladorVideoJuegoTest {
 	@Test
 	public void crear() throws Exception {
 		// arrange
-		ComandoVideoJuego comandoVideoJuego = new ComandoVideoJuegoTestDataBuilder().build();
+		ComandoVideoJuego comandoVideoJuego = new ComandoVideoJuegoTestDataBuilder().conNombre("Mortal Kombat").build();
 
 		// act - assert
 		mocMvc.perform(post("/videojuegos").contentType(MediaType.APPLICATION_JSON)
