@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
-    <ngb-alert #errorAlert *ngIf="errorMensaje" type="danger" (closed)="errorMensaje = ''">{{ errorMensaje }}
+    <ngb-alert #errorAlert *ngIf="errorMensaje" type="danger" (closed)="errorMensaje = ''" id="msgError">{{ errorMensaje }}
     </ngb-alert>
-    <ngb-alert #successAlert *ngIf="exitoMensaje" type="success" (closed)="exitoMensaje = ''">{{ exitoMensaje }}
+    <ngb-alert #successAlert *ngIf="exitoMensaje" type="success" (closed)="exitoMensaje = ''" id="msgExito">{{ exitoMensaje }}
     </ngb-alert>
   </div>
     <buscador-cliente (onLoadCliente) = "onLoadCliente($event)"></buscador-cliente>
@@ -12,7 +12,7 @@
             <div class="form-group ">
               <div class="input-group">
                 <input class="form-control" placeholder="Fecha de alquiler"
-                       name="dp1" [(ngModel)]="fechaInicio" ngbDatepicker #di="ngbDatepicker">
+                       name="dp1" [(ngModel)]="fechaInicio" ngbDatepicker #di="ngbDatepicker" id="dbxFechaInicial">
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary calendar" (click)="di.toggle()" type="button">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-date" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -26,7 +26,7 @@
             <div class="form-group mx-2">
                 <div class="input-group">
                   <input class="form-control" placeholder="Fecha maxima entrega"
-                         name="dp2" [(ngModel)]="fechaFin" ngbDatepicker #df="ngbDatepicker">
+                         name="dp2" [(ngModel)]="fechaFin" ngbDatepicker #df="ngbDatepicker" id="dbxFechaFinal">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="df.toggle()" type="button">
                       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-date" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -43,10 +43,10 @@
     <div class="row my-2" *ngIf = "cliente">      
         <div class="form-row align-items-center">
           <div class="col">
-              <input type="number" [(ngModel)]="cantidadVideojuego" [disabled]="!videojuego" name="criterio" class="form-control mb-2" id="cantidad" placeholder="Cantidad">
+              <input type="number" [(ngModel)]="cantidadVideojuego" [disabled]="!videojuego" name="criterio" class="form-control mb-2" id="cantidad" placeholder="Cantidad" id="txtCantidadVideojuego">
           </div>
           <div class="col-auto">
-              <button type="submit" class="btn btn-primary mb-2" [disabled]="!videojuego" (click)="agregarLista()">              
+              <button type="submit" class="btn btn-primary mb-2" [disabled]="!videojuego" (click)="agregarLista()" id="btnAgregarCantidadVideojuego">              
                     Agregar
               </button>
           </div>
@@ -109,7 +109,7 @@
           </div>
         </div>
         <div class="form-row align-items-center">
-          <button class="btn btn-primary mb-2" (click)="guardar()" *ngIf="!alquiler">              
+          <button class="btn btn-primary mb-2" (click)="guardar()" *ngIf="!alquiler" id="btnRegistrarAlquiler">              
               Registrar
           </button>
           <button class="btn btn-primary mb-2" (click)="nuevo()" >              

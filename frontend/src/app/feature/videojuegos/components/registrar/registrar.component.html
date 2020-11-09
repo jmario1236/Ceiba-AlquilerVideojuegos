@@ -3,9 +3,9 @@
         <h1>Registrar Videojuego</h1>
     </div>
     <div class="row">
-        <ngb-alert #errorAlert *ngIf="errorMensaje" type="danger" (closed)="errorMensaje = ''">{{ errorMensaje }}
+        <ngb-alert #errorAlert *ngIf="errorMensaje" type="danger" (closed)="errorMensaje = ''" id ="msgError">{{ errorMensaje }}
         </ngb-alert>
-        <ngb-alert #successAlert *ngIf="exitoMensaje" type="success" (closed)="exitoMensaje = ''">{{ exitoMensaje }}
+        <ngb-alert #successAlert *ngIf="exitoMensaje" type="success" (closed)="exitoMensaje = ''" id="msgExito">{{ exitoMensaje }}
         </ngb-alert>
     </div>
     
@@ -41,9 +41,9 @@
               <input validar type="text" id="stockVideojuego" name="stock" placeholder="Ingrese stock" class="form-control"
                   formControlName="stock">    
             </div>
-            <button type="submit" class="btn btn-primary" *ngIf="!videojuego">Registrar</button>
-            <button type="submit" class="btn btn-primary" *ngIf="videojuego">Modificar</button>
-            <button class="btn btn-secondary mx-2" (click)="irListado()">Cancelar</button>
+            <button type="submit" class="btn btn-primary" *ngIf="!videojuego" id="btnRegistrarVideoJuego">Registrar</button>
+            <button type="submit" class="btn btn-primary" *ngIf="videojuego" id="btnModificarVideoJuego">Modificar</button>
+            <button class="btn btn-secondary mx-2" (click)="irListado()">Regresar Listado</button>
           </form>
     </div>
 </div>

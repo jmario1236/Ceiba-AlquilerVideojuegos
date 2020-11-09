@@ -6,8 +6,6 @@ import { AlquilerService } from '@alquiler/shared/service/alquiler.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbAlert, NgbDatepicker, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registrar',
@@ -15,9 +13,6 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./registrar.component.css']
 })
 export class RegistrarComponent implements OnInit {
-
-  private _error = new Subject<string>();
-  private _success = new Subject<string>();
   errorMensaje;
   exitoMensaje;
   fechaInicio: NgbDateStruct;
@@ -38,19 +33,7 @@ export class RegistrarComponent implements OnInit {
   @ViewChild('successAlert', {static: false}) successAlert: NgbAlert;
   constructor(protected alquilerService:AlquilerService) { }
 
-  ngOnInit(): void {
-    this._error.subscribe(message => this.errorMensaje = message);
-    this._error.pipe(debounceTime(5000)).subscribe(() => {
-      if (this.errorAlert) {
-        this.errorMensaje = '';
-      }
-    });
-    this._success.subscribe(message => this.exitoMensaje = message);
-    this._success.pipe(debounceTime(5000)).subscribe(() => {
-      if (this.successAlert) {
-        this.exitoMensaje = '';
-      }
-    }); 
+  ngOnInit(): void {   
   }
 
   onLoadCliente(cliente){
@@ -72,12 +55,12 @@ export class RegistrarComponent implements OnInit {
     let alquiler = new ComandoAlquiler(null,moment(fechaInicio).format('YYYY-MM-DD'),moment(fechaFin).format('YYYY-MM-DD'),this.cliente.id,itemsComando);
     console.log(alquiler);
     this.alquilerService.registrarAlquiler(alquiler).subscribe({
-      next: data => {
-        this._success.next(`Se ha registrado Alquiler ID:${data.valor}`);
+      next: () => {
+        this.exitoMensaje = `Se ha registrado Alquiler`;
         this.cargarAlquiler();
       },
       error: error => {        
-        this._error.next(error.error.mensaje);
+        this.errorMensaje = error.error.mensaje;
       }
     }) 
   }

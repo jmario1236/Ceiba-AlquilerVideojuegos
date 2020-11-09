@@ -22,4 +22,21 @@ public class ServicioActualizarVideoJuegoTest {
 		BasePrueba.assertThrows(() -> servicio.ejecutar(videoJuego), ExcepcionSinDatos.class, "Videojuego no existe");
 		
 	}
+	
+	@Test
+	public void validarEjecutarTest() {
+		// arrange
+		VideoJuego videoJuego = new VideoJuegoTestDataBuilder().build();
+		RepositorioVideoJuego repositorio = Mockito.mock(RepositorioVideoJuego.class);
+		Mockito.when(repositorio.existeId(videoJuego.getId())).thenReturn(true);
+		ServicioActualizarVideoJuego servicio = new ServicioActualizarVideoJuego(repositorio);
+		Mockito.doNothing().when(repositorio).actualizar(videoJuego);
+		
+		// act
+		servicio.ejecutar(videoJuego);
+		
+		//assert 
+		Mockito.verify(repositorio, Mockito.times(1)).actualizar(videoJuego);
+		
+	}
 }

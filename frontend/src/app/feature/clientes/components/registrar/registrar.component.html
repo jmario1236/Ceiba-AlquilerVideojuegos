@@ -5,7 +5,7 @@
     <div class="row">
         <ngb-alert #errorAlert *ngIf="errorMensaje" type="danger" (closed)="errorMensaje = ''">{{ errorMensaje }}
         </ngb-alert>
-        <ngb-alert #successAlert *ngIf="exitoMensaje" type="success" (closed)="exitoMensaje = ''">{{ exitoMensaje }}
+        <ngb-alert #successAlert *ngIf="exitoMensaje" type="success" (closed)="exitoMensaje = ''" id="msgExito">{{ exitoMensaje }}
         </ngb-alert>
     </div>
     
@@ -41,9 +41,9 @@
               <input validar type="text" id="direccionCliente" name="direccion" placeholder="Ingrese dirección" class="form-control"
                   formControlName="direccion">    
             </div>
-            <button type="submit" class="btn btn-primary" *ngIf="!cliente">Registrar</button>
-            <button type="submit" class="btn btn-primary" *ngIf="cliente">modificar</button>
-            <button class="btn btn-secondary mx-2" (click)="irListado()">Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="btnRegistrarCliente" *ngIf="!cliente">Registrar</button>
+            <button type="submit" class="btn btn-primary" id="btnModificarCliente" *ngIf="cliente">Modificar</button>
+            <button class="btn btn-secondary mx-2" (click)="irListado()">Regresar Listado</button>
           </form>
     </div>
 </div>

@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClienteService } from '@clientes/shared/service/cliente.service';
-import {Subject} from 'rxjs';
-import {debounceTime} from 'rxjs/operators';
 import {NgbAlert} from '@ng-bootstrap/ng-bootstrap';
 import { Cliente } from '@clientes/shared/model/cliente';
 
@@ -13,8 +11,6 @@ import { Cliente } from '@clientes/shared/model/cliente';
   styleUrls: ['./registrar.component.css']
 })
 export class RegistrarComponent implements OnInit {
-  private _error = new Subject<string>();
-  private _success = new Subject<string>();
   public cliente:Cliente;
   clienteForm: FormGroup;
   errorMensaje;
@@ -32,20 +28,7 @@ export class RegistrarComponent implements OnInit {
 
   ngOnInit(): void {
     this.construirFormulario();
-    this.cargarDatosFormulario();
-    this._error.subscribe(message => this.errorMensaje = message);
-    this._error.pipe(debounceTime(5000)).subscribe(() => {
-      if (this.errorAlert) {
-        this.errorMensaje = '';
-      }
-    });
-    this._success.subscribe(message => this.exitoMensaje = message);
-    this._success.pipe(debounceTime(5000)).subscribe(() => {
-      if (this.successAlert) {
-        this.exitoMensaje = '';
-        this.irListado();
-      }
-    });    
+    this.cargarDatosFormulario();     
   }
 
   private cargarDatosFormulario(){
@@ -66,12 +49,12 @@ export class RegistrarComponent implements OnInit {
 
   guardar(){    
       this.clienteService.guardar(this.clienteForm.value).subscribe({
-        next: data => {
-          this._success.next(`Se ha registrado cliente ID:${data.valor}`);
+        next: () => {
+          this.exitoMensaje = `Se ha registrado cliente`;
           this.clienteForm.disable();
         },
         error: error => {
-          this._error.next(error.error.mensaje);
+          this.errorMensaje =  error.error.mensaje;
         }
       })    
   }
@@ -79,11 +62,11 @@ export class RegistrarComponent implements OnInit {
   actualizar(){
     this.clienteService.actualizar(this.clienteForm.value).subscribe({
       next: () => {        
-        this._success.next(`Se ha Actualizado la información del cliente`);
+        this.exitoMensaje =  `Se ha actualizado la información del cliente`;
         this.clienteForm.disable();        
       },
       error: error => {
-        this._error.next(error.error.mensaje);
+        this.errorMensaje =  error.error.mensaje ;
       }
     })
   }

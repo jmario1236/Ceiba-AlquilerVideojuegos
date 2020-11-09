@@ -13,6 +13,7 @@ import com.ceiba.BasePrueba;
 import com.ceiba.alquiler.servicio.testdatabuilder.AlquilerTestDataBuilder;
 import com.ceiba.alquiler.servicio.testdatabuilder.VideoJuegoTestDataBuilder;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 
 public class AlquilerTest {
 	
@@ -35,6 +36,34 @@ public class AlquilerTest {
 		assertEquals(
 				alquiler.getSubtotal()*PORCENTAJE_ADICIONAL*diasDiff, 
 				alquiler.getTotalAdiccional().doubleValue());
+		
+	}
+	
+	@Test
+	public void validarFechaIncorrectas() {
+		//arrange
+		LocalDate fechaInicial = LocalDate.parse("2020-11-03");
+		LocalDate fechaFinal = LocalDate.parse("2020-11-01");		
+		//assert
+		BasePrueba.assertThrows(() -> new AlquilerTestDataBuilder()
+											.conFechaMaximaEntrega(fechaFinal)
+											.conFechaAlquiler(fechaInicial)
+											.build(),				
+				ExcepcionValorInvalido.class, "Fechas son invalidas");
+		
+	}
+	
+	@Test
+	public void validarNoCumpleNumeroDiasMinimo() {
+		//arrange
+		LocalDate fechaInicial = LocalDate.parse("2020-11-03");
+		LocalDate fechaFinal = LocalDate.parse("2020-11-05");		
+		//assert
+		BasePrueba.assertThrows(() -> new AlquilerTestDataBuilder()
+											.conFechaMaximaEntrega(fechaFinal)
+											.conFechaAlquiler(fechaInicial)
+											.build(),				
+				ExcepcionValorInvalido.class, "Fecha maxima ingresada no cumple con el minimo de dias (3)");
 		
 	}
 	

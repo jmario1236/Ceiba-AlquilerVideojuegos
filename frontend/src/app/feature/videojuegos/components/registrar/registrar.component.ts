@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { VideoJuego } from '@videojuegos/shared/model/videojuego';
 import { VideojuegoService } from '@videojuegos/shared/service/videojuego.service';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registrar',
@@ -13,8 +11,6 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./registrar.component.css']
 })
 export class RegistrarComponent implements OnInit {
-  private _error = new Subject<string>();
-  private _success = new Subject<string>();
   public videojuego:VideoJuego;
   videojuegoForm: FormGroup;
   errorMensaje;
@@ -32,20 +28,7 @@ export class RegistrarComponent implements OnInit {
 
   ngOnInit(): void {
     this.construirFormulario();
-    this.cargarDatosFormulario();
-    this._error.subscribe(message => this.errorMensaje = message);
-    this._error.pipe(debounceTime(5000)).subscribe(() => {
-      if (this.errorAlert) {
-        this.errorMensaje = '';
-      }
-    });
-    this._success.subscribe(message => this.exitoMensaje = message);
-    this._success.pipe(debounceTime(5000)).subscribe(() => {
-      if (this.successAlert) {
-        this.exitoMensaje = '';
-        this.irListado();
-      }
-    });    
+    this.cargarDatosFormulario();    
   }
 
   private cargarDatosFormulario(){
@@ -66,12 +49,12 @@ export class RegistrarComponent implements OnInit {
 
   guardar(){    
       this.videojuegoService.guardar(this.videojuegoForm.value).subscribe({
-        next: data => {
-          this._success.next(`Se ha registrado videojuego ID:${data.valor}`);
+        next: () => {
+          this.exitoMensaje = `Se ha registrado videojuego`;
           this.videojuegoForm.disable();
         },
         error: error => {
-          this._error.next(error.error.mensaje);
+          this.errorMensaje = error.error.mensaje;
         }
       })    
   }
@@ -79,11 +62,11 @@ export class RegistrarComponent implements OnInit {
   actualizar(){
     this.videojuegoService.actualizar(this.videojuegoForm.value).subscribe({
       next: () => {        
-        this._success.next(`Se ha Actualizado la información del videojuego`);
+        this.exitoMensaje = `Se ha actualizado la información del videojuego`;
         this.videojuegoForm.disable();        
       },
       error: error => {
-        this._error.next(error.error.mensaje);
+        this.errorMensaje = error.error.mensaje;
       }
     })
   }

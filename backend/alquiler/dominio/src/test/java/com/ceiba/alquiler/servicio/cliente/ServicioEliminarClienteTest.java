@@ -24,4 +24,21 @@ public class ServicioEliminarClienteTest {
 		BasePrueba.assertThrows(() -> servicio.ejecutar(cliente.getId()), ExcepcionSinDatos.class, "El cliente no existe");
 		
 	}
+	
+	@Test
+	public void validarEjecutar() {
+		// arrange
+		Cliente cliente = new ClienteTestDataBuilder().build();
+		RepositorioCliente repositorio = Mockito.mock(RepositorioCliente.class);
+		Mockito.when(repositorio.existeId(cliente.getId())).thenReturn(true);
+		ServicioEliminarCliente servicio = new ServicioEliminarCliente(repositorio);
+		Mockito.doNothing().when(repositorio).eliminar(cliente.getId());
+		//act
+		servicio.ejecutar(cliente.getId());
+		
+		//assert
+		Mockito.verify(repositorio, Mockito.times(1)).eliminar(cliente.getId());
+		
+	}
+	
 }
