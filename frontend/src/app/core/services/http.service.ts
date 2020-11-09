@@ -6,7 +6,7 @@ export interface Options {
   headers?: HttpHeaders;
   params?: HttpParams;
 }
-@Injectable()
+@Injectable({providedIn:"root"})
 export class HttpService {
 
   constructor(protected http: HttpClient) { }
