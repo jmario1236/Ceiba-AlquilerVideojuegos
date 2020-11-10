@@ -1,8 +1,11 @@
 package com.ceiba.alquiler.controlador;
 
 import static org.hamcrest.Matchers.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +36,7 @@ public class ComandoControladorAlquilerTest {
 	private MockMvc mocMvc;
 
 	@Test
-	public void crear() throws Exception {
+	public void crearTest() throws Exception {
 		// arrange
 		ComandoCrearAlquiler comando = new ComandoCrearAlquilerTestDataBuilder().build();
 
@@ -42,4 +45,22 @@ public class ComandoControladorAlquilerTest {
 				.content(objectMapper.writeValueAsString(comando))).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.valor").value(any(Integer.class)));
 	}
+	
+	@Test
+	public void finalizarAlquilerTest() throws Exception {
+		// arrange
+		ComandoCrearAlquiler comando = new ComandoCrearAlquilerTestDataBuilder().conId(2L).conCliente(4L).build();
+
+		// act - assert
+		mocMvc.perform(put("/alquileres/{id}",comando.getId())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(comando)))
+				.andExpect(status().isOk());
+		
+		mocMvc.perform(get("/alquileres/cliente/{id}",comando.getCliente())
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())				
+				.andExpect(jsonPath("$").doesNotExist());
+	}
+	
 }

@@ -1,0 +1,1 @@
+select id, id_cliente, fecha_alquiler, fecha_maxima_entrega from alquiler where id = :id;

@@ -4,6 +4,7 @@ import com.ceiba.alquiler.puerto.repositorio.RepositorioAlquiler;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioCliente;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioVideoJuego;
 import com.ceiba.alquiler.servicio.ServicioCrearAlquiler;
+import com.ceiba.alquiler.servicio.ServicioFinalizarAlquiler;
 import com.ceiba.alquiler.servicio.cliente.ServicioActualizarCliente;
 import com.ceiba.alquiler.servicio.cliente.ServicioCrearCliente;
 import com.ceiba.alquiler.servicio.cliente.ServicioEliminarCliente;
@@ -49,5 +50,10 @@ public class BeanServicio {
     @Bean
     public ServicioCrearAlquiler servicioCrearAlquiler (RepositorioAlquiler repositorioAlquiler, RepositorioCliente repositorioCliente, RepositorioVideoJuego repositorioVideoJuego) {
     	return new ServicioCrearAlquiler(repositorioAlquiler, repositorioCliente, repositorioVideoJuego);
+    }
+    
+    @Bean
+    public ServicioFinalizarAlquiler servicioFinalizarAlquiler (RepositorioAlquiler repositorioAlquiler, RepositorioVideoJuego repositorioVideoJuego) {
+    	return new ServicioFinalizarAlquiler(repositorioAlquiler, repositorioVideoJuego);
     }
 }

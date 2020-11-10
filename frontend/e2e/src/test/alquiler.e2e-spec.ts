@@ -85,10 +85,37 @@ describe('Pruebas para gestion de los alquileres', () => {
 
     });
 
+
+    it('Deberia validar alquiler con fechas erroneas', () => {  
+
+        //arrange       
+        const criterioCliente = "1143354985";
+        const criterioVideoJuego = "PMN-0002";
+        const fechaInicio = "2020-11-03";
+        const fechaFin = "2020-11-01";
+        const cantidad = 2;
+
+        //act
+        navBar.clickLinkAlquiler();
+        alquilerPage.ingresarCriterioCliente(criterioCliente);
+        alquilerPage.clickBotonBuscarCliente();
+        alquilerPage.ingresarFechaAlquiler(fechaInicio);
+        alquilerPage.ingresarFechaEntregaMaxima(fechaFin);
+        alquilerPage.ingresarCriterioVideojuego(criterioVideoJuego);
+        alquilerPage.clickBotonBuscarVideojuego();
+        alquilerPage.ingresarCantidad(cantidad);
+        alquilerPage.clickBotonAgregarCantidad();
+        alquilerPage.clickBotonRegistrarAlquiler();
+
+        //assert
+        expect(alquilerPage.obtenerTextoMsgError()).toEqual('Fechas son invalidas');
+
+    });
+
     it('Deberia crear Alquiler', () => {
         
 
-        navBar.clickLinkAlquiler();
+        //arrange
         const criterioCliente = "1143354985";
         const criterioVideoJuego = "PMN-0002";
         const fechaInicio = "2020-11-03";
@@ -96,6 +123,7 @@ describe('Pruebas para gestion de los alquileres', () => {
         const cantidad = 2;
 
         //act
+        navBar.clickLinkAlquiler();
         alquilerPage.ingresarCriterioCliente(criterioCliente);
         alquilerPage.clickBotonBuscarCliente();
         alquilerPage.ingresarFechaAlquiler(fechaInicio);

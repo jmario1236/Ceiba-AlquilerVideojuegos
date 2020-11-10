@@ -21,6 +21,16 @@ public class ComandoCrearAlquilerTestDataBuilder {
 		generarItems();
 	}
 	
+	public ComandoCrearAlquilerTestDataBuilder conId(Long id) {
+		this.id = id;
+		return this;
+	}
+	
+	public ComandoCrearAlquilerTestDataBuilder conCliente(Long cliente) {
+		this.cliente = cliente;
+		return this;
+	}
+	
 	private void generarItems() {
 		items = new ArrayList<ComandoCrearAlquilerItem>();
 		items.add(new ComandoCrearAlquilerItem(null, 2L, 3, 5000.0));
