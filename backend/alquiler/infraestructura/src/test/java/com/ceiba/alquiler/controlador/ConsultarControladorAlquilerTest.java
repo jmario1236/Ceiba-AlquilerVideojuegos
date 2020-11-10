@@ -39,7 +39,7 @@ public class ConsultarControladorAlquilerTest {
 	@Test
 	public void consultarNoExiste() throws Exception {
 		// arrange
-		Long id_cliente = 4L;
+		Long id_cliente = 5L;
 		// act - assert
 		mocMvc.perform(get("/alquileres/cliente/{id}",id_cliente)
 				.contentType(MediaType.APPLICATION_JSON))
