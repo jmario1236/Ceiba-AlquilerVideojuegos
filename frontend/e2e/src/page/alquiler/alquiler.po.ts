@@ -12,12 +12,25 @@ export class AlquilerPage {
     private dbxFechaInicial = element(by.id('dbxFechaInicial'));
     private dbxFechaFinal = element(by.id('dbxFechaFinal'));
 
+    private totalMulta = element(by.id('totalMulta'));
+
+    private totalAdicional = element(by.id('totalAdicional'));
 
     private txtCantidadVideojuego = element(by.id('txtCantidadVideojuego'));
     private btnAgregarCantidadVideojuego = element(by.id('btnAgregarCantidadVideojuego'));
 
     async clickBotonRegistrarAlquiler() {
         await this.btnRegistrarAlquiler.click();
+    }
+
+    async obtenerTotalMulta(){
+        let multa = await this.totalMulta.getAttribute('value');
+        return parseFloat(multa);
+    }
+
+    async obtenerTotalAdicional(){
+        let totalAdicional = await this.totalAdicional.getAttribute('value');
+        return parseFloat(totalAdicional);
     }
 
     async obtenerTextoMsgExito(){

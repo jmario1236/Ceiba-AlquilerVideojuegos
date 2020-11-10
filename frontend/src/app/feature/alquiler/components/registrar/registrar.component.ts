@@ -86,7 +86,7 @@ export class RegistrarComponent implements OnInit {
   private loadFechas(fechaIn:Date){    
     return {
       day: moment(fechaIn).date(),
-      month: moment(fechaIn).month(),
+      month: moment(fechaIn).month()+1,
       year: moment(fechaIn).year()
     }    
   }

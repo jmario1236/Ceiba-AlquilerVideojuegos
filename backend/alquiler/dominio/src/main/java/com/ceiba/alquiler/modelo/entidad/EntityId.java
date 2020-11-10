@@ -1,18 +1,13 @@
 package com.ceiba.alquiler.modelo.entidad;
 
-import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 
 import lombok.Getter;
 
 @Getter
-public class EntityId {
-	private static final String ID_INVALIDO = "ID invalido";	
+public class EntityId {	
 	private Long id;
 
-	public EntityId(Long id) {
-		if(id <= 0) {
-			throw new ExcepcionValorInvalido(ID_INVALIDO);
-		}
+	public EntityId(Long id) {		
 		this.id = id;
 	}
 }

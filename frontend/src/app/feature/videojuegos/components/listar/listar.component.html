@@ -25,7 +25,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let videojuego of videojuegos | async" id="{{ videojuego.codigo }}">
+        <tr *ngFor="let videojuego of videojuegos | async" id="{{ videojuego.codigo }}" class="filaVideojuego">
           <th scope="row">{{ videojuego.codigo }}</th>
           <td>{{ videojuego.nombre }}</td>
           <td>{{ videojuego.genero }}</td>

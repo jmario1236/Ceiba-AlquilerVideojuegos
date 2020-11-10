@@ -1,12 +1,18 @@
 import { AppPage } from '../app.po';
 import { ClientePage } from '../page/cliente/cliente.po';
 import { NavbarPage } from "../page/navbar/navbar.po";
+import { ClienteTestDataBuilder } from './test-data-builder/cliente-testdatabuilder';
 
 
 describe('Pruebas para gestion del clientes', () => {
     let navBar: NavbarPage;
     let page: AppPage;
     let clientePage: ClientePage;
+    let cliente: ClienteTestDataBuilder;
+
+    beforeAll(() => {
+        cliente = new ClienteTestDataBuilder();
+    })
 
     beforeEach(() => {
         navBar = new NavbarPage();
@@ -16,20 +22,16 @@ describe('Pruebas para gestion del clientes', () => {
 
     it('Deberia crear cliente', () => {
         //arrange
-        const IDENTIFICACION = '1143354982';
-        const NOMBRE = 'Julio';
-        const APELLIDO = 'Del rio';
-        const TELEFONO = '6614223';
-        const DIRECCION = '6614223';
+    
         //act
         page.navigateTo();
         navBar.clickLinkCliente();
         clientePage.clickBotonCrearCliente();
-        clientePage.ingresarIdentificacion(IDENTIFICACION);
-        clientePage.ingresarNombre(NOMBRE);
-        clientePage.ingresarApellido(APELLIDO);
-        clientePage.ingresarTelefono(TELEFONO);
-        clientePage.ingresarDireccion(DIRECCION);
+        clientePage.ingresarIdentificacion(cliente.identificacion);
+        clientePage.ingresarNombre(cliente.nombre);
+        clientePage.ingresarApellido(cliente.apellido);
+        clientePage.ingresarTelefono(cliente.telefono);
+        clientePage.ingresarDireccion(cliente.direccion);
 
         clientePage.clickBotonRegistrarCliente();
 
@@ -40,25 +42,34 @@ describe('Pruebas para gestion del clientes', () => {
 
     it('Deberia modificar cliente', () => {
         //arrange
-        const IDENTIFICACION = '1143354982';
-        const NOMBRE = 'Mario';
-        const APELLIDO = 'Contreras';
-        const TELEFONO = '6614223';
-        const DIRECCION = '6614223';
+        
         //act
         page.navigateTo();
         navBar.clickLinkCliente();
-        clientePage.clickModificarLista(IDENTIFICACION);
-        clientePage.ingresarIdentificacion(IDENTIFICACION);
-        clientePage.ingresarNombre(NOMBRE);
-        clientePage.ingresarApellido(APELLIDO);
-        clientePage.ingresarTelefono(TELEFONO);
-        clientePage.ingresarDireccion(DIRECCION);
+        clientePage.clickModificarLista(cliente.identificacion);
+        clientePage.ingresarIdentificacion(cliente.identificacion);
+        clientePage.ingresarNombre(cliente.nombre);
+        clientePage.ingresarApellido(cliente.apellido);
+        clientePage.ingresarTelefono(cliente.telefono);
+        clientePage.ingresarDireccion(cliente.direccion);
 
         clientePage.clickBotonModificarCliente();
 
         //assert
         expect(clientePage.obtenerTextoMsgExito()).toEqual('Se ha actualizado la información del cliente');
+    });
+
+    it('Deberia Eliminar un cliente', async () => {
+        //arrange
+       
+        //act
+        page.navigateTo();
+        navBar.clickLinkCliente();
+        let tamano = await clientePage.numeroFilasClientes();
+        clientePage.clickEliminarLista(cliente.identificacion);
+        let tamanoActual =  await clientePage.numeroFilasClientes();
+        //assert
+        expect(tamanoActual).toEqual(tamano -1);
     });
 
 });

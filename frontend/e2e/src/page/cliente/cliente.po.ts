@@ -56,4 +56,11 @@ export class ClientePage {
         await element(by.id('acciones-'+identificacion)).element(by.id('btn-editar')).click();
     }
     
+    async clickEliminarLista(identificacion){
+        await element(by.id('acciones-'+identificacion)).element(by.id('btn-eliminar')).click();
+    }
+
+    async numeroFilasClientes(){
+        return await element.all(by.className('filaClientes')).count();
+    }
 }

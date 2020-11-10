@@ -55,5 +55,13 @@ export class VideojuegoPage {
     async clickModificarLista(identificacion){
         await element(by.id('acciones-'+identificacion)).element(by.id('btn-editar')).click();
     }
+
+    async clickEliminarLista(identificacion){
+        await element(by.id('acciones-'+identificacion)).element(by.id('btn-eliminar')).click();
+    }
+
+    async numeroFilasVideojuegos(){
+        return await element.all(by.className('filaVideojuego')).count();
+    }
     
 }

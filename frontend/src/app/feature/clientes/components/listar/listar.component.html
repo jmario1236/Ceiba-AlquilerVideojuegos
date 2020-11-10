@@ -25,7 +25,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let cliente of clientes | async" id="{{cliente.identificacion}}">
+    <tr *ngFor="let cliente of clientes | async" id="{{cliente.identificacion}}" class="filaClientes">
       <th scope="row">{{ cliente.identificacion }}</th>
       <td>{{ cliente.nombre }}</td>
       <td>{{ cliente.apellido }}</td>
